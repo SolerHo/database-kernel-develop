@@ -31,23 +31,26 @@ Since the database course is recommended, only good articles, papers or blogs ar
 - [3. SQL \& Relational Algebra](#3-sql--relational-algebra)
 - [4. DDL \& DML](#4-ddl--dml)
 - [5. Relational Model](#5-relational-model)
-- [6. Storage \& Buffer](#6-storage--buffer)
-  - [6.1 Storage](#61-storage)
-  - [6.2 Buffer management](#62-buffer-management)
-- [CS 15-445 课程 Lecture05](#cs-15-445-课程-lecture05)
-- [7. Index structure](#7-index-structure)
-  - [7.2 B+ Tree](#72-b-tree)
-  - [7.3](#73)
+- [6. Storage management](#6-storage-management)
+  - [6.1 Buffer management](#61-buffer-management)
+  - [6.2 Index structure](#62-index-structure)
+  - [6.3 B+ Tree](#63-b-tree)
+  - [6.4 B- Tree](#64-b--tree)
+  - [6.5 Hash table](#65-hash-table)
+  - [6.6 LSM Tree](#66-lsm-tree)
 - [8. Query Evaluation（Processing）](#8-query-evaluationprocessing)
+- [SQL Query Parser](#sql-query-parser)
+- [Query Executor](#query-executor)
 - [9. Query Optimization](#9-query-optimization)
-- [10. Transaction](#10-transaction)
+- [Lock manager](#lock-manager)
+- [10. Transaction management](#10-transaction-management)
 - [11. Network](#11-network)
 - [12. Serialization](#12-serialization)
 - [13. Concurrency Control](#13-concurrency-control)
-- [14. Crash Recovery](#14-crash-recovery)
+- [14. Crash Recovery management](#14-crash-recovery-management)
 - [15. NoSQL](#15-nosql)
 - [16. NewSQL](#16-newsql)
-- [17. Distributed Database](#17-distributed-database)
+- [17. Distributed \& Paralleled](#17-distributed--paralleled)
 - [18. AI4DB and DB4AI (frontier tech)](#18-ai4db-and-db4ai-frontier-tech)
 - [15. OLAP、OLTP、HTAP](#15-olapoltphtap)
   - [15.1 OLAP](#151-olap)
@@ -96,7 +99,7 @@ You only need to know a programming language.
 |UC Berkeley|CS61C|[Great Ideas in Computer Architecture (Machine Structures)](https://www-inst.eecs.berkeley.edu//~cs61c/sp17/#resources)|Spring 2017|N/A|
 |UC Berkeley|CS 152/252A|[Computer Architecture and Engineering](https://inst.eecs.berkeley.edu/~cs152/sp22/)|Spring 2022|N/A|
 |N/A|N/A|Crash Course Computer Science||[bilibili地址](https://www.bilibili.com/video/BV1EW411u7th?p=1)|
-|
+
 
 #### 2.1.2 Books
 - Reference Course Resources
@@ -111,7 +114,7 @@ You only need to know a programming language.
 |MIT|6.828|[Operating System Engineering](https://pdos.csail.mit.edu/6.828/2018/schedule.html)|Fall 2018||
 |UC Berkeley|CS162|[Operating Systems and System Programming](https://inst.eecs.berkeley.edu/~cs162/fa20/)|Fall 2020||
 |MIT|6.033|http://web.mit.edu/6.033/www/index.shtml|N/A|covers four units of technical content: operating systems, networking, distributed systems, and security||
-|
+
 
 #### 2.2.2 Books
 - Reference Course Resources
@@ -124,7 +127,7 @@ You only need to know a programming language.
 |CMU|CS 15-744|[Computer Networks](https://www.cs.cmu.edu/~srini/15-744/S18/www/syllabus.html)|Spring 2018||
 |中科大USTC|N/A|[计算机网络](https://www.bilibili.com/video/BV1JV411t7ow?p=1)|N/A|undergraduate stage|
 |中科大USTC|N/A|[高级计算机网络](https://www.bilibili.com/video/BV1BL4y1J7vh?p=1)|N/A|postgraduate stage|
-|
+
 
 #### 2.3.2 Books
 - Reference Course Resources
@@ -137,7 +140,7 @@ You only need to know a programming language.
 |UC Berkeley|CS 61B|[Data Structures](http://fa20.datastructur.es/)|Fall 2020||
 |CMU|CS 15-122|[Principles of Imperative Computation](http://www.cs.cmu.edu/~15122/schedule.shtml)|Spring 2023|Past Courses Page 404|
 |CMU|CS 15-121|[Introduction Data Structures](http://www.cs.cmu.edu/~mjs/121/lectures.html)|Spring 2018||
-|
+
 
 
 #### 2.4.2 Books
@@ -152,7 +155,6 @@ You only need to know a programming language.
 |MIT|6.006|[Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/calendar/)|Spring 2020|Introduction to Algorithmns|
 |CMU|CS 15-451/651|[Algorithm Design and Analysis](http://www.cs.cmu.edu/~15451-f21/schedule.html)|Fall 2021||
 |CMU|CS 15-850|[Advanced Algorithms](http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15850-f20/www/)|Fall 2020||
-|
 
 #### 2.5.2 Books
 - Reference Course Resources
@@ -171,9 +173,12 @@ You only need to know a programming language.
 |CMU|CS 15-721|[Advanced Database Systems](https://15721.courses.cs.cmu.edu/spring2020/schedule.html)|Spring 2020|Instructor: [Andy Pavlo](https://www.cs.cmu.edu/~pavlo/)|
 |CMU|CS 15-799|[Special Topics: Self-Driving Database Management Systems](https://15799.courses.cs.cmu.edu/spring2022/schedule.html)|Spring 2022|Instructor: [Andy Pavlo](https://www.cs.cmu.edu/~pavlo/)||
 |uwaterloo|CS 856|[Distributed data management fundamentals (architectures, data placement, query optimization)](https://cs.uwaterloo.ca/~tozsu/courses/cs856/F02/lecture-1.pdf)<br>[Distributed transaction processing, concurrency control, recovery, interoperability](https://cs.uwaterloo.ca/~tozsu/courses/cs856/F02/lecture-2.pdf)|Fall 2002|Only need these two slides, nothing else|
-|
+|N/A|N/A|[Let's Build a Simple Database: Writing a sqlite clone from scratch in C](https://cstack.github.io/db_tutorial/)||Thanks to cstack|
+
 
 #### 2.6.2 Books
+- [fundamentals of database systems 7th edition solutions](https://amirsmvt.github.io/Database/Static_files/Fundamental_of_Database_Systems.pdf), by Ramez Elmasri, Shamkant B. Navathe
+
 - [Database System Concepts Seventh Edition](https://www.db-book.com/), by Silberschatz, Korth and Sudarshan 中文版：《数据库系统概念》
 
 - [Database Management Systems](https://pages.cs.wisc.edu/~dbbook/), by Ramakrishnan and Gehrke 中文版：《数据库管理系统原理与设计》
@@ -213,7 +218,7 @@ This Section is for distributed database.
 |CMU|CS 15-440|[CMU Distributed Systems](http://www.cs.cmu.edu/~dga/15-440/F10/syllabus.html)||
 |Princeton|COS 418|[Princeton Distributed Systems](https://www.cs.princeton.edu/courses/archive/fall19/cos418/schedule.html)|Fall 2019||
 |Columbia University||[Advanced Distributed Systems](https://systems.cs.columbia.edu/ds2-class/01-papers/)|Research Papers|
-|
+
 
 
 ## 3. SQL & Relational Algebra
@@ -248,9 +253,19 @@ This Section is for distributed database.
 - [数据库系统原理学习笔记（二）-数据库设计和ER图](https://blog.taielab.com/2018-09-30/database-system-principle-leannote-db-er-designer.html)
 
 - [Understanding Relational Databases](https://www.digitalocean.com/community/tutorials/understanding-relational-databases)
-## 6. Storage & Buffer
-### 6.1 Storage
+
+- [Understanding the Enhanced ER Model Simplified 101](https://hevodata.com/learn/enhanced-er-model/)
+
+- [Data Model Relationships 101: Simplified Guide for Beginners](https://hevodata.com/learn/data-model-relationships/)
+
+- [9 ER Model Tools to use in 2023: A Comprehensive List](https://hevodata.com/learn/er-model-tools/)
+
+## 6. Storage management
 CS 15-445 课程 Lecture03、Lecture04
+
+- [Managing Database Storage Structures](https://docs.oracle.com/en/database/oracle/oracle-database/19/admqs/managing-database-storage-structures.html#GUID-1C4BBF52-BBD8-4F37-92DD-80D414A75B59)
+
+- [Some study on database storage internals](https://kousiknath.medium.com/data-structures-database-storage-internals-1f5ed3619d43)
 
 - [Storage 101 Series](https://www.red-gate.com/simple-talk/databases/sql-server/database-administration-sql-server/storage-101-welcome-to-the-wonderful-world-of-storage/)
   - [Storage 101: Understanding the Hard-Disk Drive](https://www.red-gate.com/simple-talk/databases/sql-server/database-administration-sql-server/storage-101-understanding-the-hard-disk-drive/)
@@ -265,22 +280,80 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - [Importance of RAID in Databases](https://www.sqlservercurry.com/2013/09/importance-of-raid-in-databases.html)
 
-
-### 6.2 Buffer management
+### 6.1 Buffer management
 CS 15-445 课程 Lecture05
-- 
 
 
-## 7. Index structure
+### 6.2 Index structure
+- wikiPedia : [Database index](https://en.wikipedia.org/wiki/Database_index)
+
+- [Database Indexes Explained](https://www.essentialsql.com/what-is-a-database-index/)
+
+- [An in-depth look at Database Indexing](https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/)
 
 
-### 7.2 B+ Tree
+- [Database Index: An Introduction for Beginners](https://www.makeuseof.com/database-index-beginners/)
+
+- [Indexing in DBMS: What is, Types of Indexes with EXAMPLES](https://www.guru99.com/indexing-in-database.html)
 
 
-### 7.3 
+### 6.3 B+ Tree
+- wikiPedia : [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree)
+
+- CS 186 Spring notes pdf : [B+ tree](https://cs186berkeley.net/sp22/resources/static/notes/n04-B+Trees.pdf)
+
+- University of Utah sliede :[Database Systems Index: B+ Tree](https://www.cs.bu.edu/~gkollios/cs660f19/Slides/treeindex.pdf)
+
+- [implement a B+ Tree index file](https://inst.eecs.berkeley.edu/~cs186/fa04/btree_html)
+
+- Paper 2004 : [Query and Update Efficient B-Tree Based Indexing of Moving Object](https://www.vldb.org/conf/2004/RS20P3.PDF)
+
+### 6.4 B- Tree
+- 课程：《Let's Build a Simple Database》
+  - [Part 7 - Introduction to the B-Tree](https://cstack.github.io/db_tutorial/parts/part7.html)
+  - [Part 8 - B-Tree Leaf Node Format](https://cstack.github.io/db_tutorial/parts/part8.html)
+
+- [B- Tree Datastructure](http://www.btechsmartclass.com/data_structures/b-trees.html)
+
+- [B- Trees : Software Design Using C++](https://cis.stvincent.edu/html/tutorials/swd/btree/btree.html)
+
+- Paper 2010, [Efficient B-tree Based Indexing for Cloud Data Processing](https://www.comp.nus.edu.sg/~ooibc/vldb10-cgindex.pdf), VLDB, National University of Singapore & IBM Watson Research Center
+
+
+### 6.5 Hash table
+- wikipedia : [Hash table](https://en.wikipedia.org/wiki/Hash_table)
+
+- CMU CS15-445 slide : [Hash table slide](https://15445.courses.cs.cmu.edu/fall2020/slides/06-hashtables.pdf)
+
+- GAtech.edu slide : [Hash table & Extendible Hash & Linear Hash](https://faculty.cc.gatech.edu/~jarulraj/courses/4420-f20/slides/13-hash-tables.pdf)
+
+- Blog[An Introduction to B-Tree and Hash Indexes in PostgreSQL](https://www.sentryone.com/blog/introduction-to-b-tree-and-hash-indexes-in-postgresql)
+
+- [Extendible Hashing (Dynamic approach to DBMS)](https://www.geeksforgeeks.org/extendible-hashing-dynamic-approach-to-dbms/)
+
+- [Extendible hashing for COSC 311](https://emunix.emich.edu/~shaynes/Papers/ExtendibleHashing/extendibleHashing.html)
+
+### 6.6 LSM Tree
+- [What is a LSM Tree?](https://dev.to/creativcoder/what-is-a-lsm-tree-3d75)
+
+- [Log Structured Merge Trees](https://medium.com/swlh/log-structured-merge-trees-9c8e2bea89e8)
+
+- slide : [Log Structured Merge Tree](https://lrita.github.io/images/posts/database/lsmtree-170129180333.pdf), thanks to Pinglei Guo
+
+- Paper : [The Log-Structured Merge-Tree (LSM-Tree)](https://www.cs.umb.edu/~poneil/lsmtree.pdf)
+
+- AlibabaCloud Community : [Starting from Zero: Build an LSM Database with 500 Lines of Code](https://www.alibabacloud.com/blog/starting-from-zero-build-an-lsm-database-with-500-lines-of-code_598114)
+
+- [B-Tree vs Log-Structured Merge-Tree](https://tikv.github.io/deep-dive-tikv/key-value-engine/B-Tree-vs-Log-Structured-Merge-Tree.html)
+
 
 
 ## 8. Query Evaluation（Processing）
+
+
+## SQL Query Parser
+
+## Query Executor
 
 
 
@@ -289,8 +362,12 @@ CS 15-445 课程 Lecture05
   
 - 
 
-## 10. Transaction
+## Lock manager
 
+## 10. Transaction management
+- 2006, [Cost-based query transformation in Oracle](https://dl.acm.org/doi/10.5555/1182635.1164215), VLDB
+
+- 
 
 ## 11. Network
 
@@ -301,13 +378,13 @@ CS 15-445 课程 Lecture05
 ## 13. Concurrency Control
 
 
-## 14. Crash Recovery
+## 14. Crash Recovery management
 
 ## 15. NoSQL
 
 ## 16. NewSQL
 
-## 17. Distributed Database
+## 17. Distributed & Paralleled
 - Oracle7 Server Concepts Manual : [Distributed Databases](https://docs.oracle.com/cd/A57673_01/DOC/server/doc/SCN73/ch21.htm)
 - [Spanner: Google's Globally-Distributed Database](https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf)
 
@@ -347,11 +424,12 @@ Hybrid Transactional/Analytical Processing
 
 |ID|Database|DataBase Type|Blog|Github|
 |:--:|--|--|--|--|
-|1|SQlite||[SQlite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
+|1|SQLite||[SQLite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
 |2|LevelDB|fast key-value storage library|[LevelDB 源码剖析](https://www.zhihu.com/column/c_1282795241104465920)|https://github.com/google/leveldb|
 |3|PolarDB-X|cloud native distributed SQL Database|[PolarDB-X 源码解读](https://www.zhihu.com/column/c_1449680469579640832)|https://github.com/polardb/polardbx-sql|
 |4|OceanBase|distributed relational database ||https://github.com/oceanbase/oceanbase|
 |5|TiDB|cloud-native, distributed, MySQL-Compatible database|[TiDB源码阅读分析](https://github.com/pingcap/presentations/blob/master/hackathon-2019/reference-document-of-hackathon-2019.md)|https://github.com/pingcap/tidb|
+|6|openGauss|open source relational database management system|[openGauss数据库源码解析](https://www.zhihu.com/column/c_1358363246349635584)|https://github.com/opengauss-mirror/openGauss-server|
 
 taobao MySQL 数据库内核月报：http://mysql.taobao.org/monthly/
 
