@@ -51,13 +51,14 @@ Since the database course is recommended, only good articles, papers or blogs ar
 - [15. NoSQL](#15-nosql)
 - [16. NewSQL](#16-newsql)
 - [17. Distributed \& Paralleled](#17-distributed--paralleled)
-- [18. AI4DB and DB4AI (frontier tech)](#18-ai4db-and-db4ai-frontier-tech)
 - [15. OLAP、OLTP、HTAP](#15-olapoltphtap)
   - [15.1 OLAP](#151-olap)
   - [15.2 OLTP](#152-oltp)
   - [15.3 HTAP](#153-htap)
+- [Graph Database](#graph-database)
 - [16. Project Source Code Analysis](#16-project-source-code-analysis)
 - [17. Mini-Project Labs](#17-mini-project-labs)
+- [18. AI4DB and DB4AI (frontier tech)](#18-ai4db-and-db4ai-frontier-tech)
 
 
 ## 1. Description
@@ -220,7 +221,6 @@ This Section is for distributed database.
 |Columbia University||[Advanced Distributed Systems](https://systems.cs.columbia.edu/ds2-class/01-papers/)|Research Papers|
 
 
-
 ## 3. SQL & Relational Algebra
 - SQL 知识点：Book《Database System Conceptsm》Chapter3、Chapter4、Chapter5
 - Relational Algebra 知识点：Book《Database System Conceptsm》Chapter6
@@ -280,6 +280,8 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - [Importance of RAID in Databases](https://www.sqlservercurry.com/2013/09/importance-of-raid-in-databases.html)
 
+- Microsoft Research Paper : [Faster: A Concurrent Key-Value Store with In-Place Updates](https://www.microsoft.com/en-us/research/uploads/prod/2018/03/faster-sigmod18.pdf), SIGMOD2018
+
 ### 6.1 Buffer management
 CS 15-445 课程 Lecture05
 
@@ -327,7 +329,7 @@ CS 15-445 课程 Lecture05
 
 - GAtech.edu slide : [Hash table & Extendible Hash & Linear Hash](https://faculty.cc.gatech.edu/~jarulraj/courses/4420-f20/slides/13-hash-tables.pdf)
 
-- Blog[An Introduction to B-Tree and Hash Indexes in PostgreSQL](https://www.sentryone.com/blog/introduction-to-b-tree-and-hash-indexes-in-postgresql)
+- Blog : [An Introduction to B-Tree and Hash Indexes in PostgreSQL](https://www.sentryone.com/blog/introduction-to-b-tree-and-hash-indexes-in-postgresql)
 
 - [Extendible Hashing (Dynamic approach to DBMS)](https://www.geeksforgeeks.org/extendible-hashing-dynamic-approach-to-dbms/)
 
@@ -342,7 +344,7 @@ CS 15-445 课程 Lecture05
 
 - Paper : [The Log-Structured Merge-Tree (LSM-Tree)](https://www.cs.umb.edu/~poneil/lsmtree.pdf)
 
-- AlibabaCloud Community : [Starting from Zero: Build an LSM Database with 500 Lines of Code](https://www.alibabacloud.com/blog/starting-from-zero-build-an-lsm-database-with-500-lines-of-code_598114)
+- AlibabaCloud Community Blog : [Starting from Zero: Build an LSM Database with 500 Lines of Code](https://www.alibabacloud.com/blog/starting-from-zero-build-an-lsm-database-with-500-lines-of-code_598114)
 
 - [B-Tree vs Log-Structured Merge-Tree](https://tikv.github.io/deep-dive-tikv/key-value-engine/B-Tree-vs-Log-Structured-Merge-Tree.html)
 
@@ -365,7 +367,7 @@ CS 15-445 课程 Lecture05
 ## Lock manager
 
 ## 10. Transaction management
-- 2006, [Cost-based query transformation in Oracle](https://dl.acm.org/doi/10.5555/1182635.1164215), VLDB
+- Paper 2006, [Cost-based query transformation in Oracle](https://dl.acm.org/doi/10.5555/1182635.1164215), VLDB
 
 - 
 
@@ -381,35 +383,44 @@ CS 15-445 课程 Lecture05
 ## 14. Crash Recovery management
 
 ## 15. NoSQL
+- [NoSQL Tutorial: What is, Types of NoSQL Databases & Example](https://www.guru99.com/nosql-tutorial.html)
 
 ## 16. NewSQL
 
+- [Understand the Differences Between NewSQL and Distributed SQL](https://www.yugabyte.com/blog/newsql-distributed-sql-differences/)
+
+
 ## 17. Distributed & Paralleled
 - Oracle7 Server Concepts Manual : [Distributed Databases](https://docs.oracle.com/cd/A57673_01/DOC/server/doc/SCN73/ch21.htm)
-- [Spanner: Google's Globally-Distributed Database](https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf)
-
-## 18. AI4DB and DB4AI (frontier tech)
-- University of Magdeburg slides:
-  - slide 01 : https://www.dbse.ovgu.de/en/-p-578-EGOTEC-35lsmf8qh52t9v3rhrjdojrd46/_/5_ai-1.pdf
-  - slide 02 : https://www.dbse.ovgu.de/-p-578/_/5_ai-2.pdf
-- Tsinghua University databaseGroup Github : https://github.com/TsinghuaDatabaseGroup/AIDB
-- Tsinghua & MIT Paper : https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/sigmod21-tutorial-paper.pdf
-- openGauss Blog : [openGauss AI4DB and DB4AI](https://blog.opengauss.org/en/post/2022/opengauss-ai4db-and-db4ai/)
-- MIT databaseGroup : http://dsg.csail.mit.edu/mlforsystems/papers/
-- Blogger Github : https://github.com/LumingSun/ML4DB-paper-list
+- Paper 2012 : [Spanner: Google's Globally-Distributed Database](https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf) , OSDI
 
 ## 15. OLAP、OLTP、HTAP
 
 ### 15.1 OLAP
-OnLine Analytical Processing
+- WikiPedia : [OnLine Analytical Processing](https://en.wikipedia.org/wiki/Online_analytical_processing)
+
+- AWS Blog : [What Is Online Analytical Processing?](https://aws.amazon.com/what-is/olap/)
+
+- Azure Blog : [Online analytical processing (OLAP)](https://learn.microsoft.com/en-us/azure/architecture/data-guide/relational-data/online-analytical-processing)
+
 - [An Overview of Data Warehousing and OLAP Technology](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/sigrecord.pdf)
 
 ### 15.2 OLTP
-Online Transaction Processing
+- wikiPedia : [Online transaction processing](https://en.wikipedia.org/wiki/Online_transaction_processing)
+
+- [What is OLTP? Definition, Architecture, Example](https://www.guru99.com/what-is-oltp.html)
+
+- Azure Blog : [Online transaction processing (OLTP)](https://learn.microsoft.com/en-us/azure/architecture/data-guide/relational-data/online-transaction-processing)
+
+- [LAP vs. OLTP: Understanding 13 Crucial Differences](https://www.spiceworks.com/tech/artificial-intelligence/articles/olap-vs-oltp/)
 
 
 ### 15.3 HTAP
-Hybrid Transactional/Analytical Processing
+- [Hybrid transactional/analytical processing](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)
+
+- Tsinghua University databaseGroup Sigmod2022 slide : [HTAP database : A Tutorial](https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/sigmod22-htap-slides.pdf)
+
+- [What is HTAP?](https://www.singlestore.com/blog/what-is-htap/)
 
 - [A Common Database Approach for OLTP and OLAP Using an In-Memory Column DataBase](http://www.sigmod09.org/images/sigmod1ktp-plattner.pdf)
 
@@ -419,22 +430,60 @@ Hybrid Transactional/Analytical Processing
   - [什么是真正的HTAP？（一）背景篇](https://zhuanlan.zhihu.com/p/542008685)
   - [什么是真正的 HTAP ？（二）挑战篇](https://zhuanlan.zhihu.com/p/544938116)
 
+- AlibabaCloud Community Blog : : [400x Faster HTAP Real-time Data Analysis with PolarDB](https://www.alibabacloud.com/blog/400x-faster-htap-real-time-data-analysis-with-polardb_598985)
+
+- GreenPlum database Blog : [World Class Open Source Distributed HTAP Database Based On PostgreSQL](https://greenplum.org/world-class-open-source-distributed-htap-database-based-on-postgresql/)
+
+- Paper 2020 : [TiDB: A Raft-based HTAP Database](https://www.vldb.org/pvldb/vol13/p3072-huang.pdf), VLDB
+
+- [PolarDB for PostgreSQL HTAP 架构详解](https://apsaradb.github.io/PolarDB-for-PostgreSQL/zh/theory/arch-htap.html)
+
+
+
+## Graph Database
+- Paper 2022 : [ByteGraph: A High-Performance Distributed Graph  Database in ByteDance](https://vldb.org/pvldb/vol15/p3306-li.pdf) , VLDB
+
+- [ByteGraph: A Graph Database for TikTok](https://www.mydistributed.systems/2023/01/bytegraph-graph-database-for-tiktok.html)
+
+- [字节跳动自研万亿级图数据库 & 图计算实践](https://zhuanlan.zhihu.com/p/109401046)
 
 ## 16. Project Source Code Analysis
+Just collect, some databases have not been read yet. Thanks to all Authors.
 
 |ID|Database|DataBase Type|Blog|Github|
 |:--:|--|--|--|--|
-|1|SQLite||[SQLite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
+|1|SQLite|a small relational database management system|[SQLite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
 |2|LevelDB|fast key-value storage library|[LevelDB 源码剖析](https://www.zhihu.com/column/c_1282795241104465920)|https://github.com/google/leveldb|
 |3|PolarDB-X|cloud native distributed SQL Database|[PolarDB-X 源码解读](https://www.zhihu.com/column/c_1449680469579640832)|https://github.com/polardb/polardbx-sql|
 |4|OceanBase|distributed relational database ||https://github.com/oceanbase/oceanbase|
 |5|TiDB|cloud-native, distributed, MySQL-Compatible database|[TiDB源码阅读分析](https://github.com/pingcap/presentations/blob/master/hackathon-2019/reference-document-of-hackathon-2019.md)|https://github.com/pingcap/tidb|
-|6|openGauss|open source relational database management system|[openGauss数据库源码解析](https://www.zhihu.com/column/c_1358363246349635584)|https://github.com/opengauss-mirror/openGauss-server|
+|6|openGauss|open source relational database management system|[openGauss数据库源码解析](https://www.zhihu.com/column/c_1358363246349635584)|https://github.com/opengauss-mirror|
+|7|Redis|in-memory database that persists on disk.|[1. 如何阅读 Redis 源码？](https://blog.huangz.me/diary/2014/how-to-read-redis-source-code.html)<br>[2. redis源码解析](https://redissrc.readthedocs.io/en/latest/index.html)|https://github.com/redis/redis|
+|8|MongoDB|Cloud-Native Document Database|[MongoDB 内核源码分析](https://github.com/y123456yz/reading-and-annotate-mongodb-3.6) |https://github.com/mongodb/mongo|
+|9|StoneDB|||
+|10|RocksDB|A Persistent Key-Value Store for Flash and RAM Storage|[官方wiki文档](https://github.com/facebook/rocksdb/wiki)|https://github.com/facebook/rocksdb|
+|11|ToplingDB|RocksDB的增强分支|N/A|https://github.com/topling/toplingdb|
+|12|Greenplum|open-source massively parallel data platform for analytics, machine learning and AI.|[Greenplum 分布式数据库内核揭秘(上篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-1/)<br>[Greenplum 分布式数据库内核揭秘(下篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-2/)|https://github.com/greenplum-db/gpdb|
+|13|YugabyteDB|high-performance, cloud-native, distributed SQL database that aims to support all PostgreSQL features.|待更新|https://github.com/yugabyte/yugabyte-db|
+|13|Neo4j|Graph Database|待更新|https://github.com/neo4j/neo4j|
+|14|JanusGraph|open-source, distributed graph database|待更新|https://github.com/JanusGraph/janusgraph|
 
-taobao MySQL 数据库内核月报：http://mysql.taobao.org/monthly/
+
+taobao MySQL 数据库内核月报 ：http://mysql.taobao.org/monthly/
 
 ## 17. Mini-Project Labs
 - DeepDB : https://github.com/deepbodra97/Database-System-Implementation
 - Mini-OB : https://open.oceanbase.com/activities/4921877
 
 - CS 15-445 Labs
+
+
+## 18. AI4DB and DB4AI (frontier tech)
+- University of Magdeburg slides:
+  - slide 01 : https://www.dbse.ovgu.de/en/-p-578-EGOTEC-35lsmf8qh52t9v3rhrjdojrd46/_/5_ai-1.pdf
+  - slide 02 : https://www.dbse.ovgu.de/-p-578/_/5_ai-2.pdf
+- Tsinghua University databaseGroup Github : https://github.com/TsinghuaDatabaseGroup/AIDB
+- Tsinghua & MIT Paper : [AI Meets Database: AI4DB and DB4AI](https://dbgroup.cs.tsinghua.edu.cn/ligl/papers/sigmod21-tutorial-paper.pdf) , SIGMOD2021
+- openGauss Blog : [openGauss AI4DB and DB4AI](https://blog.opengauss.org/en/post/2022/opengauss-ai4db-and-db4ai/)
+- MIT databaseGroup : http://dsg.csail.mit.edu/mlforsystems/papers/
+- Blogger Github : https://github.com/LumingSun/ML4DB-paper-list
