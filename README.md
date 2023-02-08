@@ -1,4 +1,4 @@
-<h1 align="center">📔 Database develop RoadMap</h1>
+<h1 align="center">📔 Database Kernal develop RoadMap</h1>
 
 Author is a database amateur, so the content is not authoritative, welcome to point out my error.
 
@@ -26,8 +26,12 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [2.6 Database](#26-database)
     - [2.6.1 Course](#261-course)
     - [2.6.2 Books](#262-books)
-  - [2.6.3 Papers](#263-papers)
+    - [2.6.3 Papers](#263-papers)
   - [2.7 Distributed System](#27-distributed-system)
+    - [2.7.1 Courses](#271-courses)
+    - [2.7.2 Books](#272-books)
+    - [2.7.3 Papers](#273-papers)
+    - [2.7.4 Blogs](#274-blogs)
 - [3. SQL \& Relational Algebra](#3-sql--relational-algebra)
 - [4. DDL \& DML](#4-ddl--dml)
 - [5. Relational Model](#5-relational-model)
@@ -38,7 +42,7 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [6.4 B- Tree](#64-b--tree)
   - [6.5 Hash table](#65-hash-table)
   - [6.6 LSM Tree](#66-lsm-tree)
-- [8. Query Evaluation（Processing）](#8-query-evaluationprocessing)
+- [8. Query Processing](#8-query-processing)
 - [SQL Query Parser](#sql-query-parser)
 - [Query Executor](#query-executor)
 - [9. Query Optimization](#9-query-optimization)
@@ -55,7 +59,11 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [15.1 OLAP](#151-olap)
   - [15.2 OLTP](#152-oltp)
   - [15.3 HTAP](#153-htap)
-- [Graph Database](#graph-database)
+- [16. Graph Database](#16-graph-database)
+  - [16.1 Courses](#161-courses)
+  - [16.2 Books](#162-books)
+  - [16.3 Papers](#163-papers)
+  - [16.4 Blogs](#164-blogs)
 - [16. Project Source Code Analysis](#16-project-source-code-analysis)
 - [17. Mini-Project Labs](#17-mini-project-labs)
 - [18. AI4DB and DB4AI (frontier tech)](#18-ai4db-and-db4ai-frontier-tech)
@@ -204,12 +212,15 @@ You only need to know a programming language.
 
 - [MySQL High Availability: Tools for Building Robust Data Centers](http://web-algarve.com/books/MySQL%20&%20PHP/mysql%20high%20availability.pdf), by CharlesBell,MatsKindahl,LarsThalmann 中文版：《高可用MySQL:构建健壮的数据中心》
 
-### 2.6.3 Papers
+#### 2.6.3 Papers
 CS 15-721 Topics Papers
 
 
 ### 2.7 Distributed System
 This Section is for distributed database.
+
+- [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/)
+#### 2.7.1 Courses
 
 |University|ID|Name|Time|Comment|
 |:--:|:--:|--|--|--|
@@ -217,9 +228,102 @@ This Section is for distributed database.
 |N/A|N/A|[Distributed Systems](https://www.distributedsystemscourse.com/)||
 |Columbia University|COMS 4113|[Distributed Systems Fundamentals](https://systems.cs.columbia.edu/ds1-class/01-lectures/)||
 |CMU|CS 15-440|[CMU Distributed Systems](http://www.cs.cmu.edu/~dga/15-440/F10/syllabus.html)||
-|Princeton|COS 418|[Princeton Distributed Systems](https://www.cs.princeton.edu/courses/archive/fall19/cos418/schedule.html)|Fall 2019||
+|Princeton|COS 418|[Princeton Distributed Systems](https://www.cs.princeton.edu/courses/archive/fall19/cos418/schedule.html)|Fall 2019|Golang|
 |Columbia University||[Advanced Distributed Systems](https://systems.cs.columbia.edu/ds2-class/01-papers/)|Research Papers|
+|MIT|6.852|[MIT Distributed Algorithms](http://courses.csail.mit.edu/6.852/08/lecture.html)||
+|ETHZ|N/A|[Principles of Distributed Computing (lecture collection)](https://disco.ethz.ch/courses/podc_allstars/)||
+|Stanford|CS244b|[Distributed Systems](http://www.scs.stanford.edu/20sp-cs244b/)|Spring 2020|
+|Washington|CSE 490H|[Distributed Systems](https://courses.cs.washington.edu/courses/cse490h/11wi/#projects)|Autumn 2010|
 
+#### 2.7.2 Books
+- [Distributed Systems 3rd edition (2017)](https://www.distributed-systems.net/index.php/books/ds3/)
+- [Distributed systems for fun and profit](http://book.mixu.net/distsys/)
+- [Data-Intensive Text Processing with MapReduce](http://lintool.github.io/MapReduceAlgorithms/MapReduce-book-final.pdf) 
+- [Distributed Systems: Principles and Paradigms](https://vowi.fsinf.at/images/b/bc/TU_Wien-Verteilte_Systeme_VO_%28G%C3%B6schka%29_-_Tannenbaum-distributed_systems_principles_and_paradigms_2nd_edition.pdf)
+- [Principles of Computer System Design](https://ocw.mit.edu/courses/res-6-004-principles-of-computer-system-design-an-introduction-spring-2009/pages/online-textbook/)
+- [designing data-intensive applications](https://bayanbox.ir/view/5162266560232218675/Designing-Data-Intensive-Applications.pdf) , DDIA
+- [Introduction to Distributed Algorithms](https://ki.pwr.edu.pl/lemiesz/info/Tel.pdf)
+- 
+
+#### 2.7.3 Papers
+- List of Resource Source :
+  - http://reiddraper.github.io/distreader/
+  - MIT6.824 : http://nil.csail.mit.edu/6.824/2015/schedule.html
+  - http://henryr.github.io/distributed-systems-readings/
+
+- Causality
+  - Paper 1978 : [Time, Clocks, and the Ordering of Events in a Distributed Syste](https://lamport.azurewebsites.net/pubs/time-clocks.pdf)
+  - Paper 2008 : [Interval Tree Clocks: A Logical Clock for Dynamic Systems](https://gsd.di.uminho.pt/members/cbm/ps/itc2008.pdf) , ITC2008
+
+- Consistency
+  - [Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services](https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf)
+
+- Consensus
+  - [consensus-bridging-theory-and-practice](https://web.stanford.edu/~ouster/cgi-bin/papers/OngaroPhD.pdf)
+  - [Raft Refloated: Do We Have Consensus?](https://people.csail.mit.edu/malte/pub/papers/2015-osr-raft.pdf)
+  - [The Part Time Parliament](https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf)
+  - [Memory Coherence in Shared Virtual Memory Systems](http://nil.csail.mit.edu/6.824/2015/papers/li-dsm.pdf)
+  - [TreadMarks: Distributed Shared Memory on Standard WorkStations and Operating Systems](http://nil.csail.mit.edu/6.824/2015/papers/keleher-treadmarks.pdf)
+  - [Managing Update Conflicts in Bayou, a Weakly Connected Replicated Storage System](http://nil.csail.mit.edu/6.824/2015/papers/bayou-conflicts.pdf)
+  - [Resolving File Conflicts in the Ficus File System](http://nil.csail.mit.edu/6.824/2015/papers/ficus.pdf)
+  - [Consistency Analysis in Bloom: a CALM and Collected Approach](https://people.ucsc.edu/~palvaro/cidr11.pdf)
+  - Paper 2009 : [Object Storage on CRAQ High-throughput chain replication for read-mostly workloads](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/terrace/terrace.pdf) , USENIX2009
+  - [Distributed SQLite: a replicated SQLite service powered by RAFT](http://www.scs.stanford.edu/20sp-cs244b/projects/Distributed%20SQLite.pdf)
+
+- Data Stores
+  - [Simplified Harp File System](http://www.scs.stanford.edu/20sp-cs244b/projects/Simplified%20Harp%20File%20System.pdf)
+  - [Google File System 2.0: A Modern Design and Implementation](http://www.scs.stanford.edu/20sp-cs244b/projects/GFS%202_0.pdf)
+  - [Replication in the Harp File System](http://nil.csail.mit.edu/6.824/2015/papers/bliskov-harp.pdf)
+  - [Simplified GFS](http://www.scs.stanford.edu/20sp-cs244b/projects/Simplified%20GFS.pdf)
+  - [Chunky: a distributed GFS-based file store](http://www.scs.stanford.edu/20sp-cs244b/projects/Chunky.pdf)
+  - [Append-only Datastore](http://www.scs.stanford.edu/20sp-cs244b/projects/Append-only%20Datastore.pdf)
+  - [Key-Value Store Using Chain Replication](http://www.scs.stanford.edu/20sp-cs244b/projects/Key-Value%20Store%20Using%20Chain%20Replication.pdf)
+  - [ACID Compliant Distributed Key-Value Store](http://www.scs.stanford.edu/20sp-cs244b/projects/ACID%20Compliant%20Distributed%20Key-Value%20Store.pdf)
+  - [RAFT based Key-Value Store with Transaction Support](http://www.scs.stanford.edu/20sp-cs244b/projects/RAFT%20based%20Key-Value%20Store%20with%20Transaction%20Support.pdf)
+
+- General
+  - Paper 2010 : [The Declarative Imperative: Experiences and Conjectures in Distributed Logic](https://dsf.berkeley.edu/papers/sigrec10-declimperative.pdf) , SIGMOD2010
+  - Paper 2004 : [MapReduce: Simplified Data Processing on Large Clusters](http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf) , OSDI2004
+  - Paper : [Availability in Globally Distributed Storage Systems](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36737.pdf)
+
+- Fault Tolerance
+  - [Remus: High Availability via Asynchronous Virtual Machine Replication](http://nil.csail.mit.edu/6.824/2015/papers/remus.pdf)
+  - [Paxos Made Simple](http://nil.csail.mit.edu/6.824/2015/papers/paxos-simple.pdf) , ACM SIGACT News 2001
+  - [In Search of an Understandable Consensus Algorithm](http://nil.csail.mit.edu/6.824/2015/papers/raft-atc14.pdf)
+  - [Harvest, Yield, and Scalable Tolerant Systems](https://radlab.cs.berkeley.edu/people/fox/static/pubs/pdf/c18.pdf)
+  - [Paxos Made Moderately Complex](https://paxos.systems/)
+  - [Distributed Multi-Agent Consensus for Fault Tolerant Decision Making](http://www.scs.stanford.edu/20sp-cs244b/projects/Multi-Agent%20Consensus%20for%20Decision%20Making.pdf)
+
+  
+- Atomicity
+  - [The Akamai Network: A Platform for High-Performance
+Internet Applications](http://nil.csail.mit.edu/6.824/2015/papers/akamai.pdf)
+  - Argus : [DISTRIBUTED PROGRAMMING IN ARGUS](http://nil.csail.mit.edu/6.824/2015/papers/argus88.pdf)
+  - Thor : [Efficient Optimistic Concurrency Control
+Using Loosely Synchronized Clocks](http://nil.csail.mit.edu/6.824/2015/papers/thor95.pdf)
+
+- Application
+  - Paper 2003 : [The Google File System](http://static.googleusercontent.com/media/research.google.com/en/us/archive/gfs-sosp2003.pdf) , SOSP2003
+  - Paper 2003 : [Bigtable: A Distributed Storage System for Structured Data](http://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf) , OSDI2006
+  - Paper 2007 : [Dynamo: Amazon’s Highly Available Key-value Store ](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) , SOSP2007
+  - [Peer-to-Peer Note Taking App](http://www.scs.stanford.edu/20sp-cs244b/projects/Peer-to-Peer%20Note%20Taking%20App.pdf)
+  - [factoryOS: A Distributed and Self-Organizing Planning System in a Supply-Chain Context](http://www.scs.stanford.edu/20sp-cs244b/projects/factoryOS.pdf)
+  - [Megastore: Providing Scalable, Highly Available Storage for Interactive Services](https://courses.cs.washington.edu/courses/cse490h/11wi/CSE490H_files/cloud.megastore.pdf) , CIDR 2011
+  - [PNUTS: Yahoo!’s Hosted Data Serving Platform](https://courses.cs.washington.edu/courses/cse490h/11wi/CSE490H_files/cooper-pnuts.pdf) , VLDB 2008
+
+
+#### 2.7.4 Blogs
+- Oracle7 Server Concepts Manual : [Distributed Databases](https://docs.oracle.com/cd/A57673_01/DOC/server/doc/SCN73/ch21.htm)
+- [Replication, atomicity and order in distributed systems](http://afeinberg.github.io/2011/06/17/replication-atomicity-and-order-in-distributed-systems.html)
+- [Distributed Systems and the End of the API](https://writings.quilt.org/2014/05/12/distributed-systems-and-the-end-of-the-api/)
+- [MIT Theory of Distributed Systems (TDS)](http://groups.csail.mit.edu/tds/)
+- [分布式系统学习资料汇总](https://www.qtmuniao.com/2021/05/16/distributed-system-material/) , Blogger : 木鸟杂记
+- [分布式系统(Distributed System)资料](https://www.qtmuniao.com/2021/05/16/distributed-system-material/) , Github Blogger : zjhiphop
+- [Notes on Paxos](https://matklad.github.io/2020/11/01/notes-on-paxos.html)
+- [Understanding Paxos](https://people.cs.rutgers.edu/~pxk/417/notes/paxos.html)
+- [Paxos 学习笔记1 - Basic Paxos](https://www.cnblogs.com/ljx-null/p/15940762.html)
+- [Paxos 学习笔记2 - Multi-Paxos](https://www.cnblogs.com/ljx-null/p/15940785.html)
+- [Raft 学习笔记1 - 领导人选举和日志复制](https://www.cnblogs.com/ljx-null/p/15940921.html)
 
 ## 3. SQL & Relational Algebra
 - SQL 知识点：Book《Database System Conceptsm》Chapter3、Chapter4、Chapter5
@@ -285,7 +389,6 @@ CS 15-445 课程 Lecture03、Lecture04
 ### 6.1 Buffer management
 CS 15-445 课程 Lecture05
 
-
 ### 6.2 Index structure
 - wikiPedia : [Database index](https://en.wikipedia.org/wiki/Database_index)
 
@@ -319,7 +422,7 @@ CS 15-445 课程 Lecture05
 
 - [B- Trees : Software Design Using C++](https://cis.stvincent.edu/html/tutorials/swd/btree/btree.html)
 
-- Paper 2010, [Efficient B-tree Based Indexing for Cloud Data Processing](https://www.comp.nus.edu.sg/~ooibc/vldb10-cgindex.pdf), VLDB, National University of Singapore & IBM Watson Research Center
+- Paper 2010 , [Efficient B-tree Based Indexing for Cloud Data Processing](https://www.comp.nus.edu.sg/~ooibc/vldb10-cgindex.pdf), VLDB, National University of Singapore & IBM Watson Research Center
 
 
 ### 6.5 Hash table
@@ -350,7 +453,8 @@ CS 15-445 课程 Lecture05
 
 
 
-## 8. Query Evaluation（Processing）
+## 8. Query Processing
+- [Distributed Query Processing (DQP)](https://ogsa-dai.sourceforge.net/documentation/ogsadai4.0/ogsadai4.0-gt/DQPPart.html)
 
 
 ## SQL Query Parser
@@ -391,8 +495,14 @@ CS 15-445 课程 Lecture05
 
 
 ## 17. Distributed & Paralleled
-- Oracle7 Server Concepts Manual : [Distributed Databases](https://docs.oracle.com/cd/A57673_01/DOC/server/doc/SCN73/ch21.htm)
+- [Experiences with a Distributed, Scalable,
+Methodological File System: AnalogicFS](http://nil.csail.mit.edu/6.824/2015/papers/katabi-analogicfs.pdf)
+
+- [Monarch: Google’s Planet-Scale In-Memory
+Time Series Database](http://www.vldb.org/pvldb/vol13/p3181-adams.pdf)
+
 - Paper 2012 : [Spanner: Google's Globally-Distributed Database](https://www.usenix.org/system/files/conference/osdi12/osdi12-final-16.pdf) , OSDI
+
 
 ## 15. OLAP、OLTP、HTAP
 
@@ -438,11 +548,20 @@ CS 15-445 课程 Lecture05
 
 - [PolarDB for PostgreSQL HTAP 架构详解](https://apsaradb.github.io/PolarDB-for-PostgreSQL/zh/theory/arch-htap.html)
 
+- Paper 2022 : [Kernel-Assisted Copy-on-Write Snapshots for Main-Memory HTAP
+Databases](https://www.lfdr.de/Publications/2022/master_thesis_wolf.pdf)
+
+## 16. Graph Database
+### 16.1 Courses
 
 
-## Graph Database
+### 16.2 Books
+
+### 16.3 Papers
 - Paper 2022 : [ByteGraph: A High-Performance Distributed Graph  Database in ByteDance](https://vldb.org/pvldb/vol15/p3306-li.pdf) , VLDB
 
+
+### 16.4 Blogs
 - [ByteGraph: A Graph Database for TikTok](https://www.mydistributed.systems/2023/01/bytegraph-graph-database-for-tiktok.html)
 
 - [字节跳动自研万亿级图数据库 & 图计算实践](https://zhuanlan.zhihu.com/p/109401046)
