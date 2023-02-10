@@ -42,10 +42,20 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [6.4 B- Tree](#64-b--tree)
   - [6.5 Hash table](#65-hash-table)
   - [6.6 LSM Tree](#66-lsm-tree)
-- [8. Query Processing](#8-query-processing)
-- [SQL Query Parser](#sql-query-parser)
-- [Query Executor](#query-executor)
-- [9. Query Optimization](#9-query-optimization)
+  - [6.7 Storage engine](#67-storage-engine)
+- [7. Query Processing](#7-query-processing)
+- [8. SQL Query Parser](#8-sql-query-parser)
+- [9. Query Executor](#9-query-executor)
+- [9. Optimization](#9-optimization)
+  - [9.1 SQL Query Optimization](#91-sql-query-optimization)
+  - [9.2 Indexes Optimization](#92-indexes-optimization)
+  - [9.3 Table Optimization](#93-table-optimization)
+  - [9.4 Buffer Cache Optimization](#94-buffer-cache-optimization)
+  - [9.5 Storage Optimization](#95-storage-optimization)
+  - [9.7 table Structure Optimization](#97-table-structure-optimization)
+    - [9.7.1 data reduction](#971-data-reduction)
+    - [9.7.2 data  partition](#972-data--partition)
+  - [9.8 SQL调优博客List](#98-sql调优博客list)
 - [Lock manager](#lock-manager)
 - [10. Transaction management](#10-transaction-management)
 - [11. Network](#11-network)
@@ -67,6 +77,7 @@ Since the database course is recommended, only good articles, papers or blogs ar
 - [16. Project Source Code Analysis](#16-project-source-code-analysis)
 - [17. Mini-Project Labs](#17-mini-project-labs)
 - [18. AI4DB and DB4AI (frontier tech)](#18-ai4db-and-db4ai-frontier-tech)
+- [Database Retrospective](#database-retrospective)
 
 
 ## 1. Description
@@ -213,8 +224,17 @@ You only need to know a programming language.
 - [MySQL High Availability: Tools for Building Robust Data Centers](http://web-algarve.com/books/MySQL%20&%20PHP/mysql%20high%20availability.pdf), by CharlesBell,MatsKindahl,LarsThalmann 中文版：《高可用MySQL:构建健壮的数据中心》
 
 #### 2.6.3 Papers
-CS 15-721 Topics Papers
+- CS 15-721 Topics Papers
 
+- Paper 2017 : [How to Build a Non-Volatile Memory Database Management System](https://db.cs.cmu.edu/papers/2017/p1753-arulraj.pdf)
+
+- Aticle : [Main Memory Database Systems](http:/justinlevandoski.org/papers/fnt-mmdb.pdf)
+
+- Paper thesis 2018 : [The Design and Implementation of a Non-Volatile Memory Database Management System](https://faculty.cc.gatech.edu/~jarulraj/papers/2018.thesis.pdf)
+
+- harvard Aticle : [The Design and Implementation of Modern Column-Oriented Database Systems](https://stratos.seas.harvard.edu/files/stratos/files/columnstoresfntdbs.pd)
+
+- [In-Memory Database Systems - A Paradigm Shift](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=f0c37c844e331bea681ff7e1a981d8e053f2a753)
 
 ### 2.7 Distributed System
 This Section is for distributed database.
@@ -243,7 +263,7 @@ This Section is for distributed database.
 - [Principles of Computer System Design](https://ocw.mit.edu/courses/res-6-004-principles-of-computer-system-design-an-introduction-spring-2009/pages/online-textbook/)
 - [designing data-intensive applications](https://bayanbox.ir/view/5162266560232218675/Designing-Data-Intensive-Applications.pdf) , DDIA
 - [Introduction to Distributed Algorithms](https://ki.pwr.edu.pl/lemiesz/info/Tel.pdf)
-- 
+
 
 #### 2.7.3 Papers
 - List of Resource Source :
@@ -318,7 +338,7 @@ Using Loosely Synchronized Clocks](http://nil.csail.mit.edu/6.824/2015/papers/th
 - [Distributed Systems and the End of the API](https://writings.quilt.org/2014/05/12/distributed-systems-and-the-end-of-the-api/)
 - [MIT Theory of Distributed Systems (TDS)](http://groups.csail.mit.edu/tds/)
 - [分布式系统学习资料汇总](https://www.qtmuniao.com/2021/05/16/distributed-system-material/) , Blogger : 木鸟杂记
-- [分布式系统(Distributed System)资料](https://www.qtmuniao.com/2021/05/16/distributed-system-material/) , Github Blogger : zjhiphop
+- [分布式系统(Distributed System)资料](https://github.com/ty4z2008/Qix/blob/master/ds.md) , Github Blogger : ty4z2008
 - [Notes on Paxos](https://matklad.github.io/2020/11/01/notes-on-paxos.html)
 - [Understanding Paxos](https://people.cs.rutgers.edu/~pxk/417/notes/paxos.html)
 - [Paxos 学习笔记1 - Basic Paxos](https://www.cnblogs.com/ljx-null/p/15940762.html)
@@ -392,8 +412,9 @@ CS 15-445 课程 Lecture05
 ### 6.2 Index structure
 - wikiPedia : [Database index](https://en.wikipedia.org/wiki/Database_index)
 
-- [Database Indexes Explained](https://www.essentialsql.com/what-is-a-database-index/)
+- Google Cloud docs : [Indexes](https://cloud.google.com/datastore/docs/concepts/indexes)
 
+- [Database Indexes Explained](https://www.essentialsql.com/what-is-a-database-index/)
 - [An in-depth look at Database Indexing](https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/)
 
 
@@ -407,7 +428,7 @@ CS 15-445 课程 Lecture05
 
 - CS 186 Spring notes pdf : [B+ tree](https://cs186berkeley.net/sp22/resources/static/notes/n04-B+Trees.pdf)
 
-- University of Utah sliede :[Database Systems Index: B+ Tree](https://www.cs.bu.edu/~gkollios/cs660f19/Slides/treeindex.pdf)
+- University of Utah sliede : [Database Systems Index: B+ Tree](https://www.cs.bu.edu/~gkollios/cs660f19/Slides/treeindex.pdf)
 
 - [implement a B+ Tree index file](https://inst.eecs.berkeley.edu/~cs186/fa04/btree_html)
 
@@ -451,26 +472,136 @@ CS 15-445 课程 Lecture05
 
 - [B-Tree vs Log-Structured Merge-Tree](https://tikv.github.io/deep-dive-tikv/key-value-engine/B-Tree-vs-Log-Structured-Merge-Tree.html)
 
+### 6.7 Storage engine
+- [The Beginner’s Guide to MySQL Storage Engines](https://www.sisense.com/blog/beginners-guide-to-mysql-storage-engines/)
+
+- [MySQL Storage Engines](https://www.w3resource.com/mysql/mysql-storage-engines.php)
+
+- MySQL 8.0  docs : [Chapter 15 The InnoDB Storage Engine](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)
+
+- MySQL 8.0  docs : [Chapter 16 Alternative Storage Engines](https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html)
+
+- [Hybrid storage engine for geospatial data using NoSQL and SQL paradigms](https://www.scielo.sa.cr/scielo.php?script=sci_arttext&pid=S0379-39822021000100040)
+
+- Oracle docs : [Chapter 13. Storage Engines](https://docs.oracle.com/cd/E19078-01/mysql/mysql-refman-5.0/storage-engines.html)
+
+- Paper 2021 : Designing a persistent-memory-native storage engine for SQL database systems , , IEEE NVMSA 2021
+  - Paper : https://nvmsa2021.github.io/paper/NVMSA_2021_Session_5-2_paper.pdf
+  - Slide : https://nvmsa2021.github.io/slides/NVMSA_2021_Session_5-2_slides.pdf
 
 
-## 8. Query Processing
+## 7. Query Processing
 - [Distributed Query Processing (DQP)](https://ogsa-dai.sourceforge.net/documentation/ogsadai4.0/ogsadai4.0-gt/DQPPart.html)
 
 
-## SQL Query Parser
+## 8. SQL Query Parser
 
-## Query Executor
+## 9. Query Executor
 
 
 
-## 9. Query Optimization
+## 9. Optimization
+- [15 Best Practices for SQL Optimization](https://betterprogramming.pub/15-best-practices-for-sql-optimization-956759626321)
+
+- [Tips for SQL Database Optimization](https://www.alibabacloud.com/blog/tips-for-sql-database-optimization_595053)
+
+### 9.1 SQL Query Optimization
 - [Top 10 SQL Query Optimization Tips to Improve Database Performance](https://www.mantralabsglobal.com/blog/sql-query-optimization-tips/), by Avishek Singh
   
-- 
+- [SQL Query Optimization: How to Tune Performance of SQL Queries](https://blog.devart.com/how-to-optimize-sql-query.html)
+
+- Oracle docs : [5 Query Optimization](https://docs.oracle.com/cd/E18283_01/timesten.112/e14261/query.htm)
+
+- [The SQLite Query Optimizer Overview](https://www.sqlite.org/optoverview.html)
+
+- [How to Optimize SQL Queries: Helpful Tips and Techniques
+](https://www.apriorit.com/dev-blog/381-sql-query-optimization)
+### 9.2 Indexes Optimization
+- Google Cloud docs : [Optimizing Indexes](https://cloud.google.com/datastore/docs/concepts/optimize-indexes)
+
+- [How to use Indexing for SQL Query Optimization](https://towardsdatascience.com/indexing-for-sql-query-optimization-139b57db9fc6)
+
+- [Database Optimization Techniques #1: Indexing](https://optimizdba.com/database-optimization-techniques-1-indexing/)
+
+- [Understanding The Techniques Of Database Indexing](https://optimizdba.com/understanding-the-techniques-of-database-indexing/)
+
+- [Optimizing SQL Server index strategies](https://www.sqlshack.com/optimizing-sql-server-index-strategies/)
+
+- [Indexes - Optimize Queries](https://sqlmodel.tiangolo.com/tutorial/indexes/)
+
+- [Examples: Using Indexes for Query Optimization](https://docs.oracle.com/en/database/other-databases/nosql-database/22.1/sqlreferencefornosql/examples-query-optimization.html)
+
+- [Optimize index maintenance to improve query performance and reduce resource consumption](https://learn.microsoft.com/en-us/sql/relational-databases/indexes/reorganize-and-rebuild-indexes?view=sql-server-ver16)
+
+- [How to create and optimize SQL Server indexes for better performance](https://solutioncenter.apexsql.com/how-to-create-and-optimize-sql-server-indexes-for-better-performance/)
+
+- [Tutorial on MySQL Database Optimization using Indexes](https://www.section.io/engineering-education/mysql-query-optimization-using-indexes-with-examples/)
+
+### 9.3 Table Optimization
+
+- [How To Optimize MySQL Tables](https://phoenixnap.com/kb/mysql-optimize-table)
+- [MySQL Optimize Table: How to Keep Your Database Running Smoothly](https://www.singlestore.com/blog/mysql-optimize-table/)
+
+- MySQL docs : [8.5 Optimizing for InnoDB Table](https://dev.mysql.com/doc/refman/8.0/en/optimizing-innodb.html)
+
+### 9.4 Buffer Cache Optimization
+- [Buffer cache: What is it and how does it impact database performance?](https://blog.quest.com/buffer-cache-what-is-it-and-how-does-it-impact-database-performance/)
+
+- [EXPLAIN (ANALYZE) needs BUFFERS to improve the Postgres query optimization process](https://postgres.ai/blog/20220106-explain-analyze-needs-buffers-to-improve-the-postgres-query-optimization-process)
+
+### 9.5 Storage Optimization
+- [Introduction to Memory-Optimized Tables](https://learn.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/introduction-to-memory-optimized-tables?view=sql-server-ver16)
+
+- [Best Practices for MySQL Database Storage Optimization](https://alibaba-cloud.medium.com/best-practices-for-mysql-database-storage-optimization-bb7d7166252e)
+
+- AWS Storage Blog : [Storage for I/O-intensive SQL Server using Amazon EBS io2 Block Express](https://aws.amazon.com/blogs/storage/storage-for-i-o-intensive-sql-server-using-amazon-ebs-io2-block-express/)
+
+- [Data Storage and Optimization](https://docs.stardog.com/operating-stardog/database-administration/storage-optimize)
+
+
+### 9.7 table Structure Optimization
+
+#### 9.7.1 data reduction 
+- MySQL docs : [15.9.1.5 How Compression Works for InnoDB Tables](https://dev.mysql.com/doc/refman/8.0/en/innodb-compression-internals.html#:~:text=MySQL%20implements%20compression%20with%20the,in%20reduction%20of%20data%20size.)
+
+
+
+#### 9.7.2 data  partition
+- [When and how to use the SQL PARTITION BY clause](https://blog.quest.com/when-and-how-to-use-the-sql-partition-by-clause/)
+
+- [SQL Database, Table and Data Partitioning: When and How to Do It](https://www.rudderstack.com/guides/sql-table-and-data-partitioning-how-to/)
+
+
+### 9.8 SQL调优博客List
+- [SQL调优实战总结](https://juejin.cn/post/6931596460119031821)
+
+- [OceanBase SQL 调试优指南](https://www.oceanbase.com/docs/enterprise-oceanbase-database-cn-10000000000371594) , Alibaba Ant Group
+
+- [PolarDB-X SQL 调优指南](https://doc.polardbx.com/sql-tunning/topics/) , Alibaba Cloud
+
+- [TiDB SQL性能调优](https://docs.pingcap.com/zh/tidb/dev/sql-tuning-overview) , PingCAP
+
+- [SQL调优常用方法](https://www.cnblogs.com/cnjavahome/p/4230534.html)
+
+- [MySQL 性能调优](https://heapdump.cn/monographic/detail/45/4827112)
+
+- [了解数据库性能优化](https://heapdump.cn/monographic/detail/18/4106442) ， thanks to TiDB
+
+- [浅谈 数据库应用与 SQL 调优的原理](https://youwu.today/skill/thinkinsql/sql-performance/)
+
+- [一文搞定MySQL性能调优](https://juejin.cn/post/6844904114250334215)
+
+- [MySQL 调优笔记](https://github.com/wardseptember/notes/blob/master/docs/Mysql/mysql%E8%B0%83%E4%BC%98%E7%AC%94%E8%AE%B0.md) ， Github Blogger : wardseptember
+
+- [10 essential MySQL performance tuning tips](https://www.infoworld.com/article/3210905/10-essential-mysql-performance-tuning-tips.html)
+
+- [101 MySQL tuning and optimization tips](https://topic.alibabacloud.com/a/101-mysql-tuning-and-optimization-tips_1_41_30053960.html) , Alibaba Cloud
 
 ## Lock manager
 
 ## 10. Transaction management
+- Google Cloud docs : [Transactions](https://cloud.google.com/datastore/docs/concepts/transactions)
+
 - Paper 2006, [Cost-based query transformation in Oracle](https://dl.acm.org/doi/10.5555/1182635.1164215), VLDB
 
 - 
@@ -490,7 +621,8 @@ CS 15-445 课程 Lecture05
 - [NoSQL Tutorial: What is, Types of NoSQL Databases & Example](https://www.guru99.com/nosql-tutorial.html)
 
 ## 16. NewSQL
-
+- [我们是怎样打造一款分布式数据库的？](https://shardingsphere.apache.org/blog/cn/material/database/)
+- [如何编写一个分布式数据库？](https://toutiao.io/posts/yedrf/preview) , PingCAP CEO刘奇
 - [Understand the Differences Between NewSQL and Distributed SQL](https://www.yugabyte.com/blog/newsql-distributed-sql-differences/)
 
 
@@ -569,24 +701,27 @@ Databases](https://www.lfdr.de/Publications/2022/master_thesis_wolf.pdf)
 ## 16. Project Source Code Analysis
 Just collect, some databases have not been read yet. Thanks to all Authors.
 
-|ID|Database|DataBase Type|Blog|Github|
-|:--:|--|--|--|--|
-|1|SQLite|a small relational database management system|[SQLite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
-|2|LevelDB|fast key-value storage library|[LevelDB 源码剖析](https://www.zhihu.com/column/c_1282795241104465920)|https://github.com/google/leveldb|
-|3|PolarDB-X|cloud native distributed SQL Database|[PolarDB-X 源码解读](https://www.zhihu.com/column/c_1449680469579640832)|https://github.com/polardb/polardbx-sql|
-|4|OceanBase|distributed relational database ||https://github.com/oceanbase/oceanbase|
-|5|TiDB|cloud-native, distributed, MySQL-Compatible database|[TiDB源码阅读分析](https://github.com/pingcap/presentations/blob/master/hackathon-2019/reference-document-of-hackathon-2019.md)|https://github.com/pingcap/tidb|
-|6|openGauss|open source relational database management system|[openGauss数据库源码解析](https://www.zhihu.com/column/c_1358363246349635584)|https://github.com/opengauss-mirror|
-|7|Redis|in-memory database that persists on disk.|[1. 如何阅读 Redis 源码？](https://blog.huangz.me/diary/2014/how-to-read-redis-source-code.html)<br>[2. redis源码解析](https://redissrc.readthedocs.io/en/latest/index.html)|https://github.com/redis/redis|
-|8|MongoDB|Cloud-Native Document Database|[MongoDB 内核源码分析](https://github.com/y123456yz/reading-and-annotate-mongodb-3.6) |https://github.com/mongodb/mongo|
-|9|StoneDB|||
-|10|RocksDB|A Persistent Key-Value Store for Flash and RAM Storage|[官方wiki文档](https://github.com/facebook/rocksdb/wiki)|https://github.com/facebook/rocksdb|
-|11|ToplingDB|RocksDB的增强分支|N/A|https://github.com/topling/toplingdb|
-|12|Greenplum|open-source massively parallel data platform for analytics, machine learning and AI.|[Greenplum 分布式数据库内核揭秘(上篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-1/)<br>[Greenplum 分布式数据库内核揭秘(下篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-2/)|https://github.com/greenplum-db/gpdb|
-|13|YugabyteDB|high-performance, cloud-native, distributed SQL database that aims to support all PostgreSQL features.|待更新|https://github.com/yugabyte/yugabyte-db|
-|13|Neo4j|Graph Database|待更新|https://github.com/neo4j/neo4j|
-|14|JanusGraph|open-source, distributed graph database|待更新|https://github.com/JanusGraph/janusgraph|
-
+|Database|DataBase Type|Blog|Github|
+|--|--|--|--|
+|SQLite|a small relational database management system|[SQLite源码分析](https://huili.github.io/index.html)|https://github.com/sqlite/sqlite|
+|LevelDB|fast key-value storage library|[LevelDB 源码剖析](https://www.zhihu.com/column/c_1282795241104465920)|https://github.com/google/leveldb|
+|MySQL|||
+|PostGreSQL||[PostGreSQL源码解读系列](https://www.cnblogs.com/flying-tiger/category/881004.html?page=3)||
+|Redis|in-memory database that persists on disk.|[1. 如何阅读 Redis 源码？](https://blog.huangz.me/diary/2014/how-to-read-redis-source-code.html)<br>[2. redis源码解析](https://redissrc.readthedocs.io/en/latest/index.html)|https://github.com/redis/redis|
+|MongoDB|Cloud-Native Document Database|[MongoDB 内核源码分析](https://github.com/y123456yz/reading-and-annotate-mongodb-3.6) |https://github.com/mongodb/mongo|
+|TiDB|cloud-native, distributed, MySQL-Compatible database|[TiDB源码阅读分析](https://cn.pingcap.com/blog/?tag=TiDB%20%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB)|https://github.com/pingcap/tidb|
+|TiKV|distributed key-value database|[TiKV源码解析系列](https://cn.pingcap.com/blog/?tag=TiKV%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)||
+|PolarDB-X|cloud native distributed SQL Database|[PolarDB-X 源码解读](https://www.zhihu.com/column/c_1449680469579640832)|https://github.com/polardb/polardbx-sql|
+|OceanBase|distributed relational database ||https://github.com/oceanbase/oceanbase|
+|openGauss|open source relational database management system|[openGauss数据库源码解析](https://www.zhihu.com/column/c_1358363246349635584)|https://github.com/opengauss-mirror|
+|StoneDB|A Real-time HTAP Database|[StoneDB 源码解读系列](https://www.zhihu.com/column/c_1578402452771938304)|
+|RocksDB|A Persistent Key-Value Store for Flash and RAM Storage|[官方wiki文档](https://github.com/facebook/rocksdb/wiki)|https://github.com/facebook/rocksdb|
+|ToplingDB|RocksDB的增强分支|N/A|https://github.com/topling/toplingdb|
+|Greenplum|open-source massively parallel data platform for analytics, machine learning and AI.|[Greenplum 分布式数据库内核揭秘(上篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-1/)<br>[Greenplum 分布式数据库内核揭秘(下篇)](https://cn.greenplum.org/greenplum-distributed-database-kernel-2/)|https://github.com/greenplum-db/gpdb|
+|YugabyteDB|high-performance, cloud-native, distributed SQL database that aims to support all PostgreSQL features.|待更新|https://github.com/yugabyte/yugabyte-db|
+|Neo4j|Graph Database|待更新|https://github.com/neo4j/neo4j|
+|JanusGraph|open-source, distributed graph database|待更新|https://github.com/JanusGraph/janusgraph|
+|OpenMLDB|an open-source machine learning database|待更新|https://github.com/4paradigm/OpenMLDB|
 
 taobao MySQL 数据库内核月报 ：http://mysql.taobao.org/monthly/
 
@@ -595,7 +730,6 @@ taobao MySQL 数据库内核月报 ：http://mysql.taobao.org/monthly/
 - Mini-OB : https://open.oceanbase.com/activities/4921877
 
 - CS 15-445 Labs
-
 
 ## 18. AI4DB and DB4AI (frontier tech)
 - University of Magdeburg slides:
@@ -606,3 +740,8 @@ taobao MySQL 数据库内核月报 ：http://mysql.taobao.org/monthly/
 - openGauss Blog : [openGauss AI4DB and DB4AI](https://blog.opengauss.org/en/post/2022/opengauss-ai4db-and-db4ai/)
 - MIT databaseGroup : http://dsg.csail.mit.edu/mlforsystems/papers/
 - Blogger Github : https://github.com/LumingSun/ML4DB-paper-list
+
+
+## Database Retrospective
+- [Databases in 2021: A Year in Review](https://ottertune.com/blog/2021-databases-retrospective/) , Andy Pavlo
+- [Databases in 2022: A Year in Review](https://ottertune.com/blog/2022-databases-retrospective/) , Andy Pavlo
