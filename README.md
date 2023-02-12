@@ -74,6 +74,7 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [15.1 OLAP](#151-olap)
   - [15.2 OLTP](#152-oltp)
   - [15.3 HTAP](#153-htap)
+  - [15.4 HSAP](#154-hsap)
 - [16. Graph Database](#16-graph-database)
   - [16.1 Courses](#161-courses)
   - [16.2 Books](#162-books)
@@ -887,6 +888,14 @@ Time Series Database](http://www.vldb.org/pvldb/vol13/p3181-adams.pdf)
 
 - PingCAP : [How We Build an HTAP Database That Simplifies Your Data Platform](https://www.pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform/)
 
+- [F1 Lightning: HTAP as a Service论文阅读笔记](https://zhuanlan.zhihu.com/p/438540968)
+
+- [【技术硬核】从Google F1 看HTAP数据库的诞生](https://zhuanlan.zhihu.com/p/157802589)
+
+- [PolarDB HTAP的功能特性和关键技术](https://zhuanlan.zhihu.com/p/479323824)
+
+- [软硬协同的HTAP数据库系统](https://zhuanlan.zhihu.com/p/357755022)
+
 - StoneDB 文章
   - [什么是真正的HTAP？（一）背景篇](https://zhuanlan.zhihu.com/p/542008685)
   - [什么是真正的 HTAP ？（二）挑战篇](https://zhuanlan.zhihu.com/p/544938116)
@@ -913,6 +922,15 @@ Databases](https://www.lfdr.de/Publications/2022/master_thesis_wolf.pdf)
 - [HybridDB · 最佳实践 · OLAP和OLTP一体化打造](http://mysql.taobao.org/monthly/2016/12/05/)
 
 - [MySQL · HTAP · 分析型执行引擎](http://mysql.taobao.org/monthly/2021/04/04/)
+
+### 15.4 HSAP
+- Paper : Alibaba Hologres: A Cloud-Native Service for Hybrid Serving/Analytical Processing
+  - VLDB Link : http://www.vldb.org/pvldb/vol13/p3272-jiang.pdf
+  - [《Alibaba Hologres: A Cloud-Native Service for Hybrid Serving/Analytical Processing 》论文导读](https://zhuanlan.zhihu.com/p/366276704)
+
+- AlibabaCloud Community Blog : [What Is the Next Stop for Big Data? Hybrid Serving/Analytical Processing (HSAP)](https://www.alibabacloud.com/blog/what-is-the-next-stop-for-big-data-hybrid-servinganalytical-processing-hsap_596440)
+
+
 ## 16. Graph Database
 ### 16.1 Courses
 - YouTube Video : [Introduction to Graph Databases Series](https://www.youtube.com/watch?v=REVkXVxvMQE&list=PL9Hl4pk2FsvWM9GWaguRhlCQ-pa-ERd4U&index=1)
