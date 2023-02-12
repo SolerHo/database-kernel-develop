@@ -36,17 +36,21 @@ Since the database course is recommended, only good articles, papers or blogs ar
 - [4. DDL \& DML](#4-ddl--dml)
 - [5. Relational Model](#5-relational-model)
 - [6. Storage management](#6-storage-management)
-  - [6.1 Buffer management](#61-buffer-management)
-  - [6.2 Index structure](#62-index-structure)
+  - [6.1 Buffer Pool](#61-buffer-pool)
+  - [6.2 Index](#62-index)
   - [6.3 B+ Tree](#63-b-tree)
   - [6.4 B- Tree](#64-b--tree)
   - [6.5 Hash table](#65-hash-table)
   - [6.6 LSM Tree](#66-lsm-tree)
   - [6.7 Storage engine](#67-storage-engine)
 - [7. Query Processing](#7-query-processing)
-- [8. SQL Query Parser](#8-sql-query-parser)
-- [9. Query Executor](#9-query-executor)
-- [9. Optimization](#9-optimization)
+- [8. SQL Parser](#8-sql-parser)
+  - [8.1 Syntax Check](#81-syntax-check)
+  - [8.2 Semantic Check](#82-semantic-check)
+  - [8.3 Shared Pool Check](#83-shared-pool-check)
+  - [8.4 Actions](#84-actions)
+- [9. SQL Executor](#9-sql-executor)
+- [9. SQL Optimization](#9-sql-optimization)
   - [9.1 SQL Query Optimization](#91-sql-query-optimization)
   - [9.2 Indexes Optimization](#92-indexes-optimization)
   - [9.3 Table Optimization](#93-table-optimization)
@@ -55,9 +59,10 @@ Since the database course is recommended, only good articles, papers or blogs ar
   - [9.7 table Structure Optimization](#97-table-structure-optimization)
     - [9.7.1 data reduction](#971-data-reduction)
     - [9.7.2 data  partition](#972-data--partition)
-  - [9.8 SQL调优博客List](#98-sql调优博客list)
-- [Lock manager](#lock-manager)
+  - [9.8 Optimizer](#98-optimizer)
+  - [9.9 SQL调优博客List](#99-sql调优博客list)
 - [10. Transaction management](#10-transaction-management)
+- [Lock manager](#lock-manager)
 - [11. Network](#11-network)
 - [12. Serialization](#12-serialization)
 - [13. Concurrency Control](#13-concurrency-control)
@@ -266,7 +271,7 @@ This Section is for distributed database.
 
 
 #### 2.7.3 Papers
-- List of Resource Source :
+- Reference :
   - http://reiddraper.github.io/distreader/
   - MIT6.824 : http://nil.csail.mit.edu/6.824/2015/schedule.html
   - http://henryr.github.io/distributed-systems-readings/
@@ -345,6 +350,8 @@ Using Loosely Synchronized Clocks](http://nil.csail.mit.edu/6.824/2015/papers/th
 - [Paxos 学习笔记2 - Multi-Paxos](https://www.cnblogs.com/ljx-null/p/15940785.html)
 - [Raft 学习笔记1 - 领导人选举和日志复制](https://www.cnblogs.com/ljx-null/p/15940921.html)
 
+- [Raft协议详解](https://zhuanlan.zhihu.com/p/27207160)
+
 ## 3. SQL & Relational Algebra
 - SQL 知识点：Book《Database System Conceptsm》Chapter3、Chapter4、Chapter5
 - Relational Algebra 知识点：Book《Database System Conceptsm》Chapter6
@@ -365,6 +372,19 @@ Using Loosely Synchronized Clocks](http://nil.csail.mit.edu/6.824/2015/papers/th
 
 - [Difference Between DDL and DML in DBMS](https://www.guru99.com/difference-between-ddl-and-dml.html)
 
+- [MySQL · 源码分析 · 原子DDL的实现过程](http://mysql.taobao.org/monthly/2018/03/02/)
+
+- [MySQL · 源码分析 · 8.0 原子DDL的实现过程【续】](http://mysql.taobao.org/monthly/2018/07/02/)
+
+- [MySQL · 源码分析 · DDL log与原子DDL的实现](http://mysql.taobao.org/monthly/2021/07/05/)
+
+- [PolarDB · 优化改进 · DDL的优化和演进](http://mysql.taobao.org/monthly/2021/01/03/)
+
+- [PolarDB · 功能特性 · 非阻塞DDL](http://mysql.taobao.org/monthly/2022/10/01/)
+
+- [MySQL · 源码分析 · 8.0 · DDL的那些事](http://mysql.taobao.org/monthly/2020/05/05/)
+
+- [X-Engine · 引擎特性 · 并行DDL](http://mysql.taobao.org/monthly/2021/01/07/)
 
 ## 5. Relational Model
 - WikiPedia : [Relational model](https://en.wikipedia.org/wiki/Relational_model)
@@ -406,10 +426,23 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - Microsoft Research Paper : [Faster: A Concurrent Key-Value Store with In-Place Updates](https://www.microsoft.com/en-us/research/uploads/prod/2018/03/faster-sigmod18.pdf), SIGMOD2018
 
-### 6.1 Buffer management
-CS 15-445 课程 Lecture05
+### 6.1 Buffer Pool
+- CS 15-445 课程 Lecture05
 
-### 6.2 Index structure
+- [MySQL · 性能优化· InnoDB buffer pool flush策略漫谈](http://mysql.taobao.org/monthly/2015/02/01/)
+
+- [MySQL · 引擎特性 · InnoDB Buffer Pool 浅析](http://mysql.taobao.org/monthly/2020/02/02/)
+
+- [MySQL · 引擎特性 · Buffer Pool 漫谈](http://mysql.taobao.org/monthly/2019/07/03/)
+
+- [MySQL · 引擎特性 · InnoDB Buffer Pool](http://mysql.taobao.org/monthly/2017/05/01/)
+
+- [MySQL · 引擎特性 · InnoDB Buffer Page 生命周期](http://mysql.taobao.org/monthly/2020/08/04/)
+
+- [InnoDB 的 Buffer Pool 分析](https://leviathan.vip/2018/12/18/InnoDB%E7%9A%84BufferPool%E5%88%86%E6%9E%90/)
+
+
+### 6.2 Index
 - wikiPedia : [Database index](https://en.wikipedia.org/wiki/Database_index)
 
 - Google Cloud docs : [Indexes](https://cloud.google.com/datastore/docs/concepts/indexes)
@@ -422,8 +455,21 @@ CS 15-445 课程 Lecture05
 
 - [Indexing in DBMS: What is, Types of Indexes with EXAMPLES](https://www.guru99.com/indexing-in-database.html)
 
+- [Database · 最佳实践 · 内存索引指南](http://mysql.taobao.org/monthly/2021/01/04/)
+
+- [MongoDB · 特性分析 · 索引原理](http://mysql.taobao.org/monthly/2016/07/05/)
+
+- [MongoDB · 引擎特性 · MongoDB索引原理](http://mysql.taobao.org/monthly/2018/09/06/)
+
+- [Sparse Indexes（稀疏索引）](https://www.mongodb.com/docs/manual/core/index-sparse/)
+
+- [MySQL · 引擎特性 · 二级索引分析](http://mysql.taobao.org/monthly/2020/01/01/)
+
+- [MySQL · 源码阅读 · 创建二级索引](http://mysql.taobao.org/monthly/2020/11/03/)
+
 
 ### 6.3 B+ Tree
+
 - wikiPedia : [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree)
 
 - CS 186 Spring notes pdf : [B+ tree](https://cs186berkeley.net/sp22/resources/static/notes/n04-B+Trees.pdf)
@@ -433,6 +479,17 @@ CS 15-445 课程 Lecture05
 - [implement a B+ Tree index file](https://inst.eecs.berkeley.edu/~cs186/fa04/btree_html)
 
 - Paper 2004 : [Query and Update Efficient B-Tree Based Indexing of Moving Object](https://www.vldb.org/conf/2004/RS20P3.PDF)
+
+- [MySQL · 引擎特性 · B+树并发控制机制的前世今生](http://mysql.taobao.org/monthly/2018/09/01/)
+
+- [Innodb 中的 Btree 实现 (一) · 引言 & insert 篇](http://mysql.taobao.org/monthly/2022/12/03/)
+
+- [POLARDB · 理论基础 · 敢问路在何方 — 论B+树索引的演进方向（上）](http://mysql.taobao.org/monthly/2018/11/01/)
+
+- [POLARDB · 性能优化 · 敢问路在何方 — 论B+树索引的演进方向（中）](http://mysql.taobao.org/monthly/2019/02/01/)
+
+- [MySQL · 源码分析 · innodb 空间索引实现](http://mysql.taobao.org/monthly/2022/08/04/)
+
 
 ### 6.4 B- Tree
 - 课程：《Let's Build a Simple Database》
@@ -445,7 +502,7 @@ CS 15-445 课程 Lecture05
 
 - Paper 2010 , [Efficient B-tree Based Indexing for Cloud Data Processing](https://www.comp.nus.edu.sg/~ooibc/vldb10-cgindex.pdf), VLDB, National University of Singapore & IBM Watson Research Center
 
-
+- [Database · 理论基础 · 高性能B-tree索引](http://mysql.taobao.org/monthly/2020/05/02/)
 ### 6.5 Hash table
 - wikipedia : [Hash table](https://en.wikipedia.org/wiki/Hash_table)
 
@@ -489,21 +546,62 @@ CS 15-445 课程 Lecture05
   - Paper : https://nvmsa2021.github.io/paper/NVMSA_2021_Session_5-2_paper.pdf
   - Slide : https://nvmsa2021.github.io/slides/NVMSA_2021_Session_5-2_slides.pdf
 
+- [MongoDB · 特性分析 · MMAPv1 存储引擎原理](http://mysql.taobao.org/monthly/2016/03/02/)
 
 ## 7. Query Processing
 - [Distributed Query Processing (DQP)](https://ogsa-dai.sourceforge.net/documentation/ogsadai4.0/ogsadai4.0-gt/DQPPart.html)
 
+- Database SQL Tuning Guide : [3 SQL Processing](https://docs.oracle.com/database/121/TGSQL/tgsql_sqlproc.htm#TGSQL175)
 
-## 8. SQL Query Parser
+## 8. SQL Parser
 
-## 9. Query Executor
+- [SQL Parser API](https://www.sqlparser.com/)
+- [Examples of SQL parsing](https://github.com/JSQLParser/JSqlParser/wiki/Examples-of-SQL-parsing)
 
+- [SQL语言解析器的实现](https://wiki.postgresql.org/images/b/ba/SQL%E8%AF%AD%E8%A8%80%E8%A7%A3%E6%9E%90%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0.pdf)
 
+- [Parser 解析重写 SQL](https://blog.victorchu.info/posts/c3d08049/)
 
-## 9. Optimization
+- [openGauss内核分析（三)：SQL解析](https://juejin.cn/post/7163657528520212511)
+### 8.1 Syntax Check
+- [SQL Syntax Checker Tools](https://www.sqlshack.com/sql-syntax-checker-tools/)
+  
+
+### 8.2 Semantic Check
+- Paper : [Semantic Parsing with Syntax- and Table-Aware SQL Generation](https://aclanthology.org/P18-1034.pdf)
+
+- [Awesome Sequence to SQL and Semantic Parsing](https://medium.com/@tao.yu/awesome-sequence-to-sql-and-semantic-parsing-1d7656861679)
+
+### 8.3 Shared Pool Check
+- [Shared Pool Management](http://pafumi.net/Shared_Pool_Management.html)
+- Blog : [Oracle Identifying Shared Pool Contention](https://blog.toadworld.com/identifying_shared_pool_contention)
+
+- [12.2 DBMS_SHARED_POOL: Pinning Objects](https://docstore.mik.ua/orelly/oracle/bipack/ch12_02.htm)
+
+### 8.4 Actions
+- [Surveying SQL parser libraries in a few high-level languages](https://datastation.multiprocess.io/blog/2022-04-11-sql-parsers.html)
+
+- [SQL解析在美团的应用](https://tech.meituan.com/2018/05/20/sql-parser-used-in-mtdp.html)
+
+- [TiDB 源码阅读系列文章（五）TiDB SQL Parser 的实现](https://cn.pingcap.com/blog/tidb-source-code-reading-5)
+
+- [MYSQL · 新特性 · MySQL 8.0对Parser所做的改进](http://mysql.taobao.org/monthly/2017/04/02/)
+
+- [MySQL · 源码分析 · 词法分析及其性能优化](http://mysql.taobao.org/monthly/2017/02/04/)
+
+## 9. SQL Executor
+- [SQL Executor, How does it work?](http://docs.safe.com/fme/html/FME_Desktop_Documentation/FME_Transformers/Transformers/sqlexecutor.htm?Highlight=sql%20delimiter)
+
+- [MySQL · 内核特性 · 8.0 新的火山模型执行器](http://mysql.taobao.org/monthly/2020/07/01/)
+
+## 9. SQL Optimization
 - [15 Best Practices for SQL Optimization](https://betterprogramming.pub/15-best-practices-for-sql-optimization-956759626321)
 
 - [Tips for SQL Database Optimization](https://www.alibabacloud.com/blog/tips-for-sql-database-optimization_595053)
+
+- [Design and Practice of Self-Developed SQL Parser](https://www.alibabacloud.com/blog/design-and-practice-of-self-developed-sql-parser_598414)
+
+- Paper : [A Pilot Study of Text-to-SQL Semantic Parsing for Vietnamese](https://openreview.net/pdf?id=uoUxTHRKEhi)
 
 ### 9.1 SQL Query Optimization
 - [Top 10 SQL Query Optimization Tips to Improve Database Performance](https://www.mantralabsglobal.com/blog/sql-query-optimization-tips/), by Avishek Singh
@@ -516,6 +614,10 @@ CS 15-445 课程 Lecture05
 
 - [How to Optimize SQL Queries: Helpful Tips and Techniques
 ](https://www.apriorit.com/dev-blog/381-sql-query-optimization)
+
+- [基于代价的慢查询优化建议](https://tech.meituan.com/2022/04/21/slow-query-optimized-advice-driven-by-cost-model.html)
+
+
 ### 9.2 Indexes Optimization
 - Google Cloud docs : [Optimizing Indexes](https://cloud.google.com/datastore/docs/concepts/optimize-indexes)
 
@@ -537,6 +639,9 @@ CS 15-445 课程 Lecture05
 
 - [Tutorial on MySQL Database Optimization using Indexes](https://www.section.io/engineering-education/mysql-query-optimization-using-indexes-with-examples/)
 
+- [MySQL索引原理及慢查询优化](https://tech.meituan.com/2014/06/30/mysql-index.html)
+
+- [SQL优化 · 经典案例 · 索引篇](http://mysql.taobao.org/monthly/2017/02/05/)
 ### 9.3 Table Optimization
 
 - [How To Optimize MySQL Tables](https://phoenixnap.com/kb/mysql-optimize-table)
@@ -572,7 +677,21 @@ CS 15-445 课程 Lecture05
 - [SQL Database, Table and Data Partitioning: When and How to Do It](https://www.rudderstack.com/guides/sql-table-and-data-partitioning-how-to/)
 
 
-### 9.8 SQL调优博客List
+### 9.8 Optimizer
+Reference : https://zhuanlan.zhihu.com/p/363997416 , thanks henry liang
+
+- Paper : [Orca: A Modular Query Optimizer Architecture for Big Data](https://15721.courses.cs.cmu.edu/spring2017/papers/15-optimizer2/p337-soliman.pdf) ,  SIGMOD 2014
+
+- Paper : [An Overview of Cost-based Optimization of Queries with Aggregates](http://sites.computer.org/debull/95SEP-CD.pdf)
+
+- Paper : [Optimizer plan change management: improved stability and performance in Oracle 11g](http://www.vldb.org/pvldb/vol1/1454175.pdf) , VLDB
+
+- Paper : [Optimizing Queries over Partitioned Tables in MPP Systems](https://www.slideshare.net/emcacademics/optimizing-queriesoverpartitionedtablesinmpp-systems-1) , SIGMOD
+
+- Paper : [Optimization of Common Table Expressions in MPP
+Database Systems](http://www.vldb.org/pvldb/vol8/p1704-elhelw.pdf) , VLDB
+
+### 9.9 SQL调优博客List
 - [SQL调优实战总结](https://juejin.cn/post/6931596460119031821)
 
 - [OceanBase SQL 调试优指南](https://www.oceanbase.com/docs/enterprise-oceanbase-database-cn-10000000000371594) , Alibaba Ant Group
@@ -591,36 +710,136 @@ CS 15-445 课程 Lecture05
 
 - [一文搞定MySQL性能调优](https://juejin.cn/post/6844904114250334215)
 
+- [TiDB SQL调优实战——索引问题](https://tidb.net/blog/29aa8e6b)
+
 - [MySQL 调优笔记](https://github.com/wardseptember/notes/blob/master/docs/Mysql/mysql%E8%B0%83%E4%BC%98%E7%AC%94%E8%AE%B0.md) ， Github Blogger : wardseptember
 
 - [10 essential MySQL performance tuning tips](https://www.infoworld.com/article/3210905/10-essential-mysql-performance-tuning-tips.html)
 
 - [101 MySQL tuning and optimization tips](https://topic.alibabacloud.com/a/101-mysql-tuning-and-optimization-tips_1_41_30053960.html) , Alibaba Cloud
 
-## Lock manager
-
 ## 10. Transaction management
 - Google Cloud docs : [Transactions](https://cloud.google.com/datastore/docs/concepts/transactions)
 
 - Paper 2006, [Cost-based query transformation in Oracle](https://dl.acm.org/doi/10.5555/1182635.1164215), VLDB
 
-- 
+- [分布式事务，理论与实践](https://zhuanlan.zhihu.com/p/573680047)
+
+- [MySQL · 引擎特性 · InnoDB 事务系统](http://mysql.taobao.org/monthly/2017/12/01/)
+
+- [MySQL · 引擎特性 · InnoDB 事务子系统介绍](http://mysql.taobao.org/monthly/2015/12/01/)
+
+- [Database · 原理介绍 · 数据库的事务与复制](http://mysql.taobao.org/monthly/2018/12/01/)
+
+- [MongoDB · 引擎特性 · 事务实现解析](http://mysql.taobao.org/monthly/2018/07/03/)
+
+- [Innodb中的事务隔离级别和锁的关系](https://tech.meituan.com/2014/08/20/innodb-lock.html)
+
+- [Database · 理论基础 · 数据库事务隔离发展历史](http://mysql.taobao.org/monthly/2018/10/06/)
+- [Database · 原理介绍 · Google Percolator 分布式事务实现原理解读](http://mysql.taobao.org/monthly/2018/11/02/)
+
+- [第 12 章 事务和并发](https://docs.jboss.org/hibernate/orm/3.5/reference/zh-CN/html/transactions.html)
+
+- Blog : [使用数据库事务](https://loopback.io/doc/zh/lb2/8880487.html)
+
+- Blog : [11. 数据库事务](https://www.bmabk.com/index.php/post/33975.html)
+
+- [InnoDB 事务分析-MVCC](https://leviathan.vip/2019/03/20/InnoDB%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%88%86%E6%9E%90-MVCC/)
+
+- [InnoDB 事务分析-Undo Log](https://leviathan.vip/2019/02/14/InnoDB%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%88%86%E6%9E%90-Undo-Log/)
+## Lock manager
+- [MySQL · 引擎特性 · 8.0 Lock Manager](http://mysql.taobao.org/monthly/2020/04/09/)
+
+- [MySQL · 引擎分析 · InnoDB行锁分析](https://zhuanlan.zhihu.com/p/56519305)
+
+- [MySQL · 引擎特性 · InnoDB index lock前世今生](http://mysql.taobao.org/monthly/2015/07/05/)
+
+- [MySQL · 最佳实践 · How to read the lock information from debugger](http://mysql.taobao.org/monthly/2020/10/03/)
+
+- [PostgreSQL · 内核特性 · 死锁检测与解决](http://mysql.taobao.org/monthly/2021/07/03/)
+- [MySQL · 引擎特性 · InnoDB 事务锁系统简介](http://mysql.taobao.org/monthly/2016/01/01/)
+
+- [MySQL · 引擎特性 · Innodb 锁子系统浅析](http://mysql.taobao.org/monthly/2017/12/02/)
+
+- [MySQL · 答疑解惑 · MySQL 锁问题最佳实践](http://mysql.taobao.org/monthly/2016/03/10/)
+
+- [MySQL · 源码分析 · InnoDB读写锁实现分析](http://mysql.taobao.org/monthly/2020/04/02/)
+
+- [InnoDB 事务 sharded 锁系统优化](https://leviathan.vip/2020/12/22/mysql-understand-trx-lock/)
+
+- [MySQL · myrocks · 事务锁分析](http://mysql.taobao.org/monthly/2018/03/07/)
+
+- [MySQL · 源码分析 · 事务锁调度分析](http://mysql.taobao.org/monthly/2021/09/01/)
+
+- [MySQL · 引擎分析 · InnoDB行锁分析](http://mysql.taobao.org/monthly/2018/05/04/)
+
+- [DataBase · 理论基础 · B+树数据库加锁历史](http://mysql.taobao.org/monthly/2022/01/01/)
+
+
 
 ## 11. Network
+- [MySQL · 源码分析 · 网络通信模块浅析](http://mysql.taobao.org/monthly/2016/07/04/)
+
+- [MySQL · 引擎特性 · 网络模块优化](http://mysql.taobao.org/monthly/2019/09/03/)
+
+- [MongoDB · 特性分析 · 网络性能优化](http://mysql.taobao.org/monthly/2017/01/04/)
 
 
 ## 12. Serialization
+- [可序列化的初学者指南](https://juejin.cn/post/7126776645414813710)
 
+- AWS Redshift Blog : [可序列化的隔离](https://docs.aws.amazon.com/zh_cn/redshift/latest/dg/c_serial_isolation.html)
+
+- [从SPI机制学习数据库驱动加载过程到SnakeYaml反序列化分析](https://moonsec.top/articles/123)
+
+- [MySQL · 源码分析 · Tokudb序列化和反序列化过程](http://mysql.taobao.org/monthly/2017/06/01/)
+
+- 美团技术团队博客 : [序列化和反序列化](https://tech.meituan.com/2015/02/26/serialization-vs-deserialization.htm)
 
 ## 13. Concurrency Control
+- [MySQL · 引擎特性 · B+树并发控制机制的前世今生](http://mysql.taobao.org/monthly/2018/09/01/)
 
+- [浅析数据库并发控制机制](http://catkang.github.io/2018/09/19/concurrency-control.html)
 
+- [Database · 理论基础 · B-tree 物理结构的并发控制](http://mysql.taobao.org/monthly/2020/11/02/)
+
+- [PolarDB · 引擎特性 · B-tree 并发控制优化](http://mysql.taobao.org/monthly/2021/12/04/)
+
+- [MySQL · 最佳实践 · RDS MySQL 8.0 语句级并发控制](http://mysql.taobao.org/monthly/2019/06/02/)
+
+- [PgSQL· 引擎特性 · 多版本并发控制介绍及实例分析](http://mysql.taobao.org/monthly/2019/08/01/)
+
+- [数据库系统 · 事务并发控制 · Two-phase Lock Protocol](http://mysql.taobao.org/monthly/2021/10/02/)
+
+- [How does MVCC (Multi-Version Concurrency Control) work](https://vladmihalcea.com/how-does-mvcc-multi-version-concurrency-control-work/)
 ## 14. Crash Recovery management
+- [MySQL · 引擎特性 · InnoDB 崩溃恢复过程](http://mysql.taobao.org/monthly/2015/06/01/)
+
+- [PgSQL · 特性分析 · checkpoint机制浅析](http://mysql.taobao.org/monthly/2017/04/04/)
+
+- [PgSQL · 特性分析 · 数据库崩溃恢复（上）](http://mysql.taobao.org/monthly/2017/05/03/)
+
+- [PgSQL · 特性分析 · 数据库崩溃恢复（下）](http://mysql.taobao.org/monthly/2017/06/04/)
+
+- [MySQL · TokuDB · 日志子系统和崩溃恢复过程](http://mysql.taobao.org/monthly/2016/05/07/)
+
+- [MySQL · myrocks · myrocks之备份恢复](http://mysql.taobao.org/monthly/2017/02/02/)
+
+- [POLARDB · 理论基础 · 数据库故障恢复机制的前世今生](http://mysql.taobao.org/monthly/2019/01/01/)
+
+- [POLARDB · 引擎特性 · PolarDB备份与恢复介绍](http://mysql.taobao.org/monthly/2022/07/02/)
+
+- [B+树数据库故障恢复概述](http://mysql.taobao.org/monthly/2022/10/04/)
+
+- [MySQL · 5.7改进 · Recovery改进](http://mysql.taobao.org/monthly/2014/11/03/)
+
+- [MySQL · 源码分析 · binlog crash recovery](http://mysql.taobao.org/monthly/2018/07/05/)
 
 ## 15. NoSQL
 - [NoSQL Tutorial: What is, Types of NoSQL Databases & Example](https://www.guru99.com/nosql-tutorial.html)
 
 ## 16. NewSQL
+- [Database · 发展前沿 · NewSQL数据库概述](http://mysql.taobao.org/monthly/2020/12/01/)
 - [我们是怎样打造一款分布式数据库的？](https://shardingsphere.apache.org/blog/cn/material/database/)
 - [如何编写一个分布式数据库？](https://toutiao.io/posts/yedrf/preview) , PingCAP CEO刘奇
 - [Understand the Differences Between NewSQL and Distributed SQL](https://www.yugabyte.com/blog/newsql-distributed-sql-differences/)
@@ -683,11 +902,29 @@ Time Series Database](http://www.vldb.org/pvldb/vol13/p3181-adams.pdf)
 - Paper 2022 : [Kernel-Assisted Copy-on-Write Snapshots for Main-Memory HTAP
 Databases](https://www.lfdr.de/Publications/2022/master_thesis_wolf.pdf)
 
+- [DataBase · 引擎特性 · OLAP/HTAP列式存储引擎概述](http://mysql.taobao.org/monthly/2021/03/05/)
+
+- [DataBase · 理论基础 · HTAP列存引擎探秘](http://mysql.taobao.org/monthly/2022/02/02/)
+
+- [PolarDB MySQL·HTAP·浅析IMCI的列存数据压缩](http://mysql.taobao.org/monthly/2022/08/01/)
+
+- [MySQL · HTAP · 分析型执行引擎](http://mysql.taobao.org/monthly/2021/04/04/)
+
+- [HybridDB · 最佳实践 · OLAP和OLTP一体化打造](http://mysql.taobao.org/monthly/2016/12/05/)
+
+- [MySQL · HTAP · 分析型执行引擎](http://mysql.taobao.org/monthly/2021/04/04/)
 ## 16. Graph Database
 ### 16.1 Courses
-
+- YouTube Video : [Introduction to Graph Databases Series](https://www.youtube.com/watch?v=REVkXVxvMQE&list=PL9Hl4pk2FsvWM9GWaguRhlCQ-pa-ERd4U&index=1)
 
 ### 16.2 Books
+- [Graph Database : New Oppotunities For Connected Data](https://web4.ensiie.fr/~stefania.dumbrava/OReilly_Graph_Databases.pdf) , Ian Robinson, Jim Webber & Emil Eifrem
+
+- [Graph Databases For Beginners](https://neo4j.com/wp-content/themes/neo4jweb/assets/images/Graph_Databases_for_Beginners.pdf) , Merkl Sasaki, Joy Chao & Rachel Howard
+
+- [Graph-Databases-For-Dummies](https://joshbersin.com/wp-content/uploads/2022/02/Graph-Databases-For-Dummies.pdf) ,  Dr. Jim Webber & Rik Van Bruggen
+
+- [The Definitive Guide to Graph Databases for the RDBMS Developer](https://go.neo4j.com/rs/710-RRC-335/images/Definitive-Guide-Graph-Databases-for-RDBMS-Developer.pdf) , Michael Hunger, Ryan Boyd & William Lyon
 
 ### 16.3 Papers
 - Paper 2022 : [ByteGraph: A High-Performance Distributed Graph  Database in ByteDance](https://vldb.org/pvldb/vol15/p3306-li.pdf) , VLDB
@@ -697,6 +934,20 @@ Databases](https://www.lfdr.de/Publications/2022/master_thesis_wolf.pdf)
 - [ByteGraph: A Graph Database for TikTok](https://www.mydistributed.systems/2023/01/bytegraph-graph-database-for-tiktok.html)
 
 - [字节跳动自研万亿级图数据库 & 图计算实践](https://zhuanlan.zhihu.com/p/109401046)
+
+- 美团技术团队 Blog : [美团图数据库平台建设及业务实践](https://tech.meituan.com/2021/04/01/nebula-graph-practice-in-meituan.html)
+
+- [Graph Databases for Beginners: Why Graph Technology Is the Future](https://neo4j.com/blog/why-graph-databases-are-the-future/)
+
+- [Graph Databases: How They Work, When to Use Them & the Advantages They Offer](https://www.influxdata.com/graph-database/)
+
+- [Developing a Small-Scale Graph Database: A Ten Step Learning Guide for Beginners](https://jitp.commons.gc.cuny.edu/developing-a-small-scale-graph-database-a-ten-step-learning-guide-for-beginners/)
+
+- [Graph Database Tutorial With Neo4j](https://www.cl.cam.ac.uk/teaching/1920/Databases/graph-tutorial.html)
+
+- [Getting started with Graph database using Neo4j](https://dev.to/codemaker2015/getting-started-with-graph-database-using-neo4j-38im)
+
+- 白皮书 : [图数据库技术十大案例](https://go.neo4j.com/rs/710-RRC-335/images/Neo4j-Top-Use-Cases-ZH.pdf)
 
 ## 16. Project Source Code Analysis
 Just collect, some databases have not been read yet. Thanks to all Authors.
