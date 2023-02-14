@@ -38,11 +38,12 @@ Since the database course is recommended, only good articles, papers or blogs ar
 - [6. Storage management](#6-storage-management)
   - [6.1 Buffer Pool](#61-buffer-pool)
   - [6.2 Index](#62-index)
-  - [6.3 B+ Tree](#63-b-tree)
-  - [6.4 B- Tree](#64-b--tree)
+  - [6.3 B+Tree](#63-btree)
+  - [6.4 B-Tree](#64-b-tree)
   - [6.5 Hash table](#65-hash-table)
-  - [6.6 LSM Tree](#66-lsm-tree)
-  - [6.7 Storage engine](#67-storage-engine)
+  - [6.6 LSM-Tree](#66-lsm-tree)
+  - [6.7 Bw-Tree](#67-bw-tree)
+  - [6.8 Storage engine](#68-storage-engine)
 - [7. Query Processing](#7-query-processing)
 - [8. SQL Parser](#8-sql-parser)
   - [8.1 Syntax Check](#81-syntax-check)
@@ -427,6 +428,8 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - Microsoft Research Paper : [Faster: A Concurrent Key-Value Store with In-Place Updates](https://www.microsoft.com/en-us/research/uploads/prod/2018/03/faster-sigmod18.pdf), SIGMOD2018
 
+- [How Lock-free Data Structures Perform in Dynamic Environments: Models and Analyses](https://graal.ens-lyon.fr/~prenaud/Publis/OPODIS16)
+
 ### 6.1 Buffer Pool
 - CS 15-445 课程 Lecture05
 
@@ -469,7 +472,7 @@ CS 15-445 课程 Lecture03、Lecture04
 - [MySQL · 源码阅读 · 创建二级索引](http://mysql.taobao.org/monthly/2020/11/03/)
 
 
-### 6.3 B+ Tree
+### 6.3 B+Tree
 
 - wikiPedia : [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree)
 
@@ -491,8 +494,9 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - [MySQL · 源码分析 · innodb 空间索引实现](http://mysql.taobao.org/monthly/2022/08/04/)
 
+- [MySQL · 引擎特性 · 手动分析InnoDB B+Tree结构](http://mysql.taobao.org/monthly/2020/04/06/)
 
-### 6.4 B- Tree
+### 6.4 B-Tree
 - 课程：《Let's Build a Simple Database》
   - [Part 7 - Introduction to the B-Tree](https://cstack.github.io/db_tutorial/parts/part7.html)
   - [Part 8 - B-Tree Leaf Node Format](https://cstack.github.io/db_tutorial/parts/part8.html)
@@ -504,6 +508,9 @@ CS 15-445 课程 Lecture03、Lecture04
 - Paper 2010 , [Efficient B-tree Based Indexing for Cloud Data Processing](https://www.comp.nus.edu.sg/~ooibc/vldb10-cgindex.pdf), VLDB, National University of Singapore & IBM Watson Research Center
 
 - [Database · 理论基础 · 高性能B-tree索引](http://mysql.taobao.org/monthly/2020/05/02/)
+
+- [要懂Greenplum索引，心里得有B树！](https://cn.greenplum.org/b-tree/)
+
 ### 6.5 Hash table
 - wikipedia : [Hash table](https://en.wikipedia.org/wiki/Hash_table)
 
@@ -517,7 +524,7 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - [Extendible hashing for COSC 311](https://emunix.emich.edu/~shaynes/Papers/ExtendibleHashing/extendibleHashing.html)
 
-### 6.6 LSM Tree
+### 6.6 LSM-Tree
 - [What is a LSM Tree?](https://dev.to/creativcoder/what-is-a-lsm-tree-3d75)
 
 - [Log Structured Merge Trees](https://medium.com/swlh/log-structured-merge-trees-9c8e2bea89e8)
@@ -530,7 +537,17 @@ CS 15-445 课程 Lecture03、Lecture04
 
 - [B-Tree vs Log-Structured Merge-Tree](https://tikv.github.io/deep-dive-tikv/key-value-engine/B-Tree-vs-Log-Structured-Merge-Tree.html)
 
-### 6.7 Storage engine
+### 6.7 Bw-Tree
+- Paper : [The Bw-Tree: A B-tree for New Hardware Platforms](https://15721.courses.cs.cmu.edu/spring2016/papers/bwtree-icde2013.pdf) , Microsoft Research
+
+- [Lock-free data structures. Inside. Memory management schemes](https://kukuruku.co/post/lock-free-data-structures-the-inside-memory-management-schemes/)
+
+- Blog : [Bw-Tree技术解读](https://zhuanlan.zhihu.com/p/29314464)
+
+- Blog : [微软提出的无锁 B 族树 —— Bw-Tree](https://www.qtmuniao.com/2021/10/17/bwtree-index/) , 木鸟杂记
+
+
+### 6.8 Storage engine
 - [The Beginner’s Guide to MySQL Storage Engines](https://www.sisense.com/blog/beginners-guide-to-mysql-storage-engines/)
 
 - [MySQL Storage Engines](https://www.w3resource.com/mysql/mysql-storage-engines.php)
@@ -813,6 +830,27 @@ Database Systems](http://www.vldb.org/pvldb/vol8/p1704-elhelw.pdf) , VLDB
 - [数据库系统 · 事务并发控制 · Two-phase Lock Protocol](http://mysql.taobao.org/monthly/2021/10/02/)
 
 - [How does MVCC (Multi-Version Concurrency Control) work](https://vladmihalcea.com/how-does-mvcc-multi-version-concurrency-control-work/)
+
+- [Efficient Locking for Concurrent Operations on B-Trees ](https://www.csd.uoc.gr/~hy460/pdf/p650-lehman.pdf)
+
+- [Database · 理论基础 · B link Tree](http://mysql.taobao.org/monthly/2020/03/06/)
+
+- [A Blink Tree method and latch protocol for synchronous node deletion in a high concurrency environment](https://arxiv.org/pdf/1009.2764.pdf)
+
+- [周刊（第23期）：图解Blink-Tree：B+Tree的一种并发优化结构和算法](https://www.codedump.info/post/20220807-weekly-23/)
+
+- Mass Tree Paper : [Cache Craftiness for Fast Multicore Key-Value Storage](https://pdos.csail.mit.edu/papers/masstree:eurosys12.pdf)
+
+- [Database · 理论基础 · Mass Tree](http://mysql.taobao.org/monthly/2019/07/07/)
+
+- Palm Tree Paper : [PALM: Parallel Architecture-Friendly Latch-Free Modifications to B+ Trees on Many-Core Processors](http://www.vldb.org/pvldb/vol4/p795-sewall.pdf)
+
+- [Database · 理论基础 · Palm Tree](http://mysql.taobao.org/monthly/2019/09/06/)
+
+- ARTree Paper : [The Adaptive Radix Tree: ARTful Indexing for Main-Memory Databases](https://db.in.tum.de/~leis/papers/ART.pdf)
+
+- [Database · 理论基础 · Multi-ART](http://mysql.taobao.org/monthly/2019/11/05/)
+
 ## 14. Crash Recovery management
 - [MySQL · 引擎特性 · InnoDB 崩溃恢复过程](http://mysql.taobao.org/monthly/2015/06/01/)
 
