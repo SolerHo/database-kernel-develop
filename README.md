@@ -201,6 +201,7 @@ You only need to know a programming language.
 |CMU|CS 15-799|[Special Topics: Self-Driving Database Management Systems](https://15799.courses.cs.cmu.edu/spring2022/schedule.html)|Spring 2022|Instructor: [Andy Pavlo](https://www.cs.cmu.edu/~pavlo/)||
 |uwaterloo|CS 856|[Distributed data management fundamentals (architectures, data placement, query optimization)](https://cs.uwaterloo.ca/~tozsu/courses/cs856/F02/lecture-1.pdf)<br>[Distributed transaction processing, concurrency control, recovery, interoperability](https://cs.uwaterloo.ca/~tozsu/courses/cs856/F02/lecture-2.pdf)|Fall 2002|Only need these two slides, nothing else|
 |N/A|N/A|[Let's Build a Simple Database: Writing a sqlite clone from scratch in C](https://cstack.github.io/db_tutorial/)||Thanks to cstack|
+|Stanford|CS 345|[Topics in Database Management Systems](https://cs.stanford.edu/people/chrismre/cs345/)|Winter 2014|Paper Readings topic, similar to CMU CS15-721|
 
 
 #### 2.6.2 Books
@@ -232,6 +233,8 @@ You only need to know a programming language.
 
 #### 2.6.3 Papers
 - CS 15-721 Topics Papers
+
+- Stanford CS 345 Winter2014 Topic Paper
 
 - Paper 2017 : [How to Build a Non-Volatile Memory Database Management System](https://db.cs.cmu.edu/papers/2017/p1753-arulraj.pdf)
 
@@ -609,6 +612,8 @@ CS 15-445 课程 Lecture03、Lecture04
 
 ## 9. SQL Executor
 - [SQL Executor, How does it work?](http://docs.safe.com/fme/html/FME_Desktop_Documentation/FME_Transformers/Transformers/sqlexecutor.htm?Highlight=sql%20delimiter)
+
+- Paper : [Adaptive Execution of Compiled Queries](https://db.in.tum.de/~leis/papers/adaptiveexecution.pdf)
 
 - [MySQL · 内核特性 · 8.0 新的火山模型执行器](http://mysql.taobao.org/monthly/2020/07/01/)
 
@@ -1052,3 +1057,4 @@ taobao MySQL 数据库内核月报 ：http://mysql.taobao.org/monthly/
 ## Database Retrospective
 - [Databases in 2021: A Year in Review](https://ottertune.com/blog/2021-databases-retrospective/) , Andy Pavlo
 - [Databases in 2022: A Year in Review](https://ottertune.com/blog/2022-databases-retrospective/) , Andy Pavlo
+
