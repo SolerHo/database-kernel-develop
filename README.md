@@ -1,4 +1,4 @@
-<h1 align="center">📔 Database Kernal develop RoadMap</h1>
+<h1 align="center">📔 Database Kernel develop RoadMap</h1>
 
 Author is a database amateur, so the content is not authoritative, welcome to point out my error.
 
@@ -274,6 +274,9 @@ This Section is for distributed database.
 - [designing data-intensive applications](https://bayanbox.ir/view/5162266560232218675/Designing-Data-Intensive-Applications.pdf) , DDIA
 - [Introduction to Distributed Algorithms](https://ki.pwr.edu.pl/lemiesz/info/Tel.pdf)
 
+- [Distributed Storage Systems: Principles, Algorithms and Designs](https://eclass.uoa.gr/modules/document/file.php/D245/2015/DistrComp.pdf)
+
+- [Distributed Systems: Concepts and Design](http://www.aspu.edu.sy/laravel-filemanager/files/18/%D9%85%D8%B1%D8%A7%D8%AC%D8%B9%20%D9%83%D9%84%D9%8A%D8%A9%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%D9%8A%D8%A9/DISTRIBUTED%20SYSTEMS%20Concepts%20and%20Design.pdf)
 
 #### 2.7.3 Papers
 - Reference :
@@ -344,6 +347,7 @@ Using Loosely Synchronized Clocks](http://nil.csail.mit.edu/6.824/2015/papers/th
 
 #### 2.7.4 Blogs
 - Oracle7 Server Concepts Manual : [Distributed Databases](https://docs.oracle.com/cd/A57673_01/DOC/server/doc/SCN73/ch21.htm)
+- University of Cambridge : [Distributed Systems](https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/dist-sys-notes.pdf)
 - [Replication, atomicity and order in distributed systems](http://afeinberg.github.io/2011/06/17/replication-atomicity-and-order-in-distributed-systems.html)
 - [Distributed Systems and the End of the API](https://writings.quilt.org/2014/05/12/distributed-systems-and-the-end-of-the-api/)
 - [MIT Theory of Distributed Systems (TDS)](http://groups.csail.mit.edu/tds/)
